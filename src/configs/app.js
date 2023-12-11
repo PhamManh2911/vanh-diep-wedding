@@ -1,0 +1,1 @@
+export const appHostname = process.env.HOSTNAME ?? '';

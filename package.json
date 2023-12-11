@@ -9,10 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.14.20",
+    "airtable": "^0.12.2",
+    "axios": "^1.6.2",
     "eslint": "8.55.0",
     "eslint-config-next": "14.0.4",
     "next": "14.0.4",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "sequelize": "^6.35.1",
+    "sqlite3": "^5.1.6"
   }
 }
