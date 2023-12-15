@@ -1,5 +1,5 @@
 import { apiflashAccessKey, apiflashApi } from "@/configs/api-flash";
-import { appHostname } from "@/configs/app";
+import { appHostname, nha } from "@/configs/app";
 import { User } from "@/database/models/user";
 import axios from "axios";
 import { NextApiRequest, NextApiResponse } from "next";
@@ -18,7 +18,11 @@ export default async function handler(req, res) {
     const response = await axios.get(`${apiflashApi}`, {
       params: {
         access_key: apiflashAccessKey,
-        url: `${appHostname}/invitation/${id}`,
+        url: `${appHostname}/invitation/${id}?nha=${nha}`,
+        width: 1327,
+        height: 1030,
+        // for testing in ngrok
+        user_agent: '/non-standard',
       },
       responseType: 'stream',
     });
