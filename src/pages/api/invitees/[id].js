@@ -1,9 +1,10 @@
 import { User } from "@/database/models/user";
-import { table } from "@/services/airtable";
+import { genTable } from "@/services/airtable";
 import { NextApiRequest, NextApiResponse } from "next";
 
-async function handleGet(res, recordId) {
-  const record = await table.find(recordId);
+async function handleGet(req, res, recordId) {
+  const { nha_trai } = req.query;
+  const record = await genTable(nha_trai === "true").find(recordId);
 
   if (record) res.status(200).json({
     data: { record: record.fields },
@@ -11,8 +12,10 @@ async function handleGet(res, recordId) {
   res.status(404).send('Record not found!');
 }
 
-async function handlePut(res, recordId, payload) {
-  const record = await table.update(recordId, payload);
+async function handlePut(req, res, recordId) {
+  const { nha_trai } = req.query;
+  const payload = req.body
+  const record = await genTable(nha_trai === "true").update(recordId, payload);
 
   if (record) res.status(200).json({
     data: { record: record.fields },
@@ -37,12 +40,10 @@ export default async function handler(req, res) {
 
   switch (req.method) {
     case 'GET':
-      await handleGet(res, recordId);
+      await handleGet(req, res, recordId);
       break;
     case 'PUT':
-      const { join, plus_one, address, date } = req.body;
-
-      await handlePut(res, recordId, { join, plus_one, date, address });
+      await handlePut(req, res, recordId);
       break;
     default:
       res.status(400).send('Method not found!');
