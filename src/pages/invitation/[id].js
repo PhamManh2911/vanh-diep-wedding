@@ -1,20 +1,20 @@
-import { appHostname } from "@/configs/app";
+import { appHostname, nha } from "@/configs/app";
 import { Box, Typography, useTheme } from "@mui/material";
 
 export async function getServerSideProps(context) {
-  const { id, nha } = context.query;
+  const { id } = context.query;
   const response = await (await fetch(`${appHostname}/api/users/${id}`)).json();
 
   return {
     props: {
       user: response.data.user,
-      nhaTrai: nha === 'trai',
     }
   };
 };
 
-export default function Invitation({ user, nhaTrai }) {
+export default function Invitation({ user }) {
   const theme = useTheme();
+  const nhaTrai = nha === 'trai';
 
   return (
     <Box width={1327} height={1030} sx={{ position: 'relative' }}>

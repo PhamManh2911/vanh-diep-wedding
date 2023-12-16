@@ -1,10 +1,15 @@
-import { postgresURI } from "@/configs/database";
+import * as pg from 'pg';
 import { DataTypes, Sequelize } from "sequelize";
 
-export const sequelize = new Sequelize(postgresURI ?? {
-  dialect: 'sqlite',
-  storage: 'database.sqlite',
-});
+import { postgresURI } from "@/configs/database";
+
+export const sequelize = postgresURI
+  ? new Sequelize(postgresURI, { dialectModule: pg })
+  : new Sequelize({
+    dialect: 'sqlite',
+    storage: 'database.sqlite',
+  });
+
 
 export const User = sequelize.define('User', {
   id: {

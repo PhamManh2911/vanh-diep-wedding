@@ -17,6 +17,7 @@ export default function AdminPage() {
   const [copied, setCopied] = useState(false);
 
   const createUser = async () => {
+    if (!userName) return;
     const response = await axios.post(`${appHostname}/api/users`, { userName });
     const user = response.data.data.user;
 
