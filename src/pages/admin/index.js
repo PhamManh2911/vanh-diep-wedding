@@ -1,4 +1,4 @@
-import { Box, InputAdornment, OutlinedInput, Stack, Typography, useTheme } from "@mui/material";
+import { Box, CircularProgress, InputAdornment, OutlinedInput, Stack, Typography, useTheme } from "@mui/material";
 
 import { appHostname, nha } from "@/configs/app";
 import { Button } from "@/components/Buttons";
@@ -15,10 +15,14 @@ export default function AdminPage() {
   const [form, setForm] = useState(false);
   const [url, setUrl] = useState('');
   const [copied, setCopied] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const createUser = async () => {
     if (!userName) return;
+    setLoading(true);
     const response = await axios.post(`${appHostname}/api/users`, { userName });
+
+    setLoading(false);
     const user = response.data.data.user;
 
     setImageUrl(`${appHostname}/api/invitation/${user.id}`);
@@ -60,7 +64,7 @@ export default function AdminPage() {
             <Typography sx={{ color: theme.palette.neutral.dark, fontFamily: 'Sans Serif', fontSize: '24px', fontWeight: 400, lineHeight: '24px' }}>Có</Typography>
           </Box>
         </Stack>
-        <Button type="filled" onClick={createUser} text='Tạo thiệp mời' />
+        <Button type="filled" onClick={createUser} text='Tạo thiệp mời' disable={loading} />
       </Stack>
       <Stack width='100%' height='100%' padding='40px' alignItems='flex-start' gap='40px' sx={{ background: `${theme.palette.primary.midLight}` }}>
         <Stack justifyContent='center' alignItems='center' width='100%'>
@@ -83,7 +87,9 @@ export default function AdminPage() {
             {imageUrl ? (
               <IconImg src={imageUrl} width='100%' height='auto' />
             ) : (
-              <Box width='100%' height='500px' sx={{ background: '#D9D9D9' }}></Box>
+              <Stack justifyContent='center' alignItems='center' width='100%' height='500px' sx={{ background: '#D9D9D9' }}>
+                {loading && (<CircularProgress />)}
+              </Stack>
             )}
           </Stack>
         </Stack>
