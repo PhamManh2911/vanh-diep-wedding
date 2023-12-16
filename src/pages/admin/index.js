@@ -1,6 +1,6 @@
 import { Box, InputAdornment, OutlinedInput, Stack, Typography, useTheme } from "@mui/material";
 
-import { nha } from "@/configs/app";
+import { appHostname, nha } from "@/configs/app";
 import { Button } from "@/components/Buttons";
 import { useState } from "react";
 import IconImg from "@/components/IconImg";
@@ -17,11 +17,11 @@ export default function AdminPage() {
   const [copied, setCopied] = useState(false);
 
   const createUser = async () => {
-    const response = await axios.post(`${location.origin}/api/users`, { userName });
+    const response = await axios.post(`${appHostname}/api/users`, { userName });
     const user = response.data.data.user;
 
-    setImageUrl(`${location.origin}/api/invitation/${user.id}`);
-    setUrl(`${location.origin}/${user.id}?name=${userName}&form=${form}`);
+    setImageUrl(`${appHostname}/api/invitation/${user.id}`);
+    setUrl(`${appHostname}/${user.id}?name=${userName}&form=${form}`);
   }
 
   const hanldeKeyDown = async (e) => {
