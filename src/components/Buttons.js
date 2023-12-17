@@ -24,7 +24,7 @@ export function NavButton({ text, onClick }) {
   );
 }
 
-export function Button({ text, onClick, type="filled", disable=false, icon=false }) {
+export function Button({ text, onClick, type="filled", disable=false, icon=false, width='100%' }) {
   const theme = useTheme();
 
   const boxSx = useMemo(() => {
@@ -117,11 +117,12 @@ export function Button({ text, onClick, type="filled", disable=false, icon=false
     >
       <Box sx={{
         display: 'flex',
-        padding: '10px 24px 10px 16px',
+        padding: '10px 16px',
         justifyContent: 'center',
         alignItems: 'center',
         gap: '8px',
         borderRadius: "100px",
+        width,
         ...(layerSx),
       }}>
         {icon && <IconImg src={iconSrc} />}

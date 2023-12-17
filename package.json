@@ -24,7 +24,8 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "sequelize": "^6.35.1",
-    "sqlite3": "^5.1.6"
+    "sqlite3": "^5.1.6",
+    "uuidv4": "^6.2.13"
   },
   "devDependencies": {
     "sequelize-cli": "^6.6.2"

@@ -45,6 +45,7 @@ theme = createTheme(theme, {
     fontWeight: 400,
     color: theme.palette.neutral.dark,
     display: {
+      textAlign: 'center',
       fontFamily: "Bellissima",
       fontSize: 57,
       lineHeight: "64px",
@@ -54,6 +55,7 @@ theme = createTheme(theme, {
       },
     },
     headline1: {
+      textAlign: 'center',
       fontFamily: "Serif",
       fontSize: 32,
       lineHeight: "40px",
@@ -63,6 +65,7 @@ theme = createTheme(theme, {
       },
     },
     headline2: {
+      textAlign: 'center',
       fontFamily: "Serif",
       fontSize: 24,
       lineHeight: "32px",
@@ -72,11 +75,13 @@ theme = createTheme(theme, {
       },
     },
     headline3: {
+      textAlign: 'center',
       fontFamily: "Serif",
       fontSize: 16,
       lineHeight: "24px",
     },
     title: {
+      textAlign: 'center',
       fontFamily: "Sans Serif",
       fontSize: 22,
       lineHeight: "28px",
@@ -87,6 +92,7 @@ theme = createTheme(theme, {
       },
     },
     label: {
+      textAlign: 'center',
       fontFamily: "Sans Serif",
       fontSize: 14,
       fontWeight: 700,
@@ -97,6 +103,7 @@ theme = createTheme(theme, {
       },
     },
     body: {
+      textAlign: 'center',
       fontFamily: "Sans Serif",
       fontSize: 16,
       lineHeight: "24px",

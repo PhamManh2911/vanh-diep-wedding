@@ -1,8 +1,6 @@
-import { Carousel } from "@/components/Carousel";
 import IconImg from "@/components/IconImg";
-import { NavButton } from "@/components/Buttons";
 import { appHostname } from "@/configs/app";
-import { Stack, Typography, useMediaQuery, useTheme } from "@mui/material";
+import { Stack, useMediaQuery, useTheme } from "@mui/material";
 import { createContext, useContext, useRef } from "react";
 import { CountDown } from "@/components/CountDown";
 import { useSearchParams } from "next/navigation";
@@ -10,6 +8,8 @@ import { EventSession } from "@/components/Event";
 import { CoupleSession } from "@/components/Couple";
 import { TimelineSession } from "@/components/Timeline";
 import { AlbumSession } from "@/components/Album";
+import { MungCuoiSession } from "@/components/MungCuoi";
+import { InvitationSession } from "@/components/Invitation";
 
 const UserContext = createContext();
 
@@ -53,6 +53,7 @@ export default function Wedding({ user }) {
   const eventRef = useRef();
   const coupleRef = useRef();
   const albumRef = useRef();
+  const mungCuoiRef = useRef();
 
   return (
     <UserContext.Provider value={{ user }}>
@@ -66,67 +67,18 @@ export default function Wedding({ user }) {
               clickEvent={() => handleScrollToView(eventRef.current)}
               clickCouple={() => handleScrollToView(coupleRef.current)}
               clickAlbum={() => handleScrollToView(albumRef.current)}
+              clickMungCuoi={() => handleScrollToView(mungCuoiRef.current)}
             />
             <CountDown />
             <EventSession ref={eventRef} />
             <CoupleSession ref={coupleRef} />
             <TimelineSession />
             <AlbumSession ref={albumRef} />
+            <MungCuoiSession ref={mungCuoiRef} />
+            <IconImg width='100%' src={isPhone ? "/images/end-session-phone.png" : "/images/end-session.png"} />
           </Stack>
         </MediaContext.Provider>
       </NhaContext.Provider>
     </UserContext.Provider>
   );
 }
-
-function InvitationSession({ username, clickEvent, clickCouple, clickMungCuoi, clickAlbum }) {
-  const theme = useTheme();
-
-  return (
-    <>
-      <Stack
-        direction='row'
-        justifyContent='center'
-        alignItems='center'
-        gap='40px'
-        height='104px'
-      >
-        <NavButton text='Sự kiện chính' onClick={clickEvent} />
-        <NavButton text='Cặp đôi' onClick={clickCouple} />
-        <IconImg src='/icons/vnd.svg' sx={{ width: '72px', hieght: '72px' }} />
-        <NavButton text='Album cưới' onClick={clickAlbum} />
-        <NavButton text='Mừng cưới' onClick={clickMungCuoi} />
-      </Stack>
-      <Stack
-        gap='8px'
-        alignItems='center'
-      >
-        <Stack alignItems='center' gap='8px'>
-          <Typography sx={{
-            color: theme.palette.primary.dark,
-            textAlign: 'center',
-            fontSize: '24px',
-            fontWeight: '400',
-            lineHeight: '32px'
-          }}>TRÂN TRỌNG KÍNH MỜI</Typography>
-          <Typography sx={{
-            color: theme.palette.primary.main,
-            textAlign: 'center',
-            fontFamily: 'Bellissima',
-            fontSize: '36px',
-            fontWeight: '400',
-            lineHeight: '44px',
-          }}>{username}</Typography>
-          <Typography sx={{
-            color: theme.palette.primary.dark,
-            textAlign: 'center',
-            fontSize: '24px',
-            fontWeight: '400',
-            lineHeight: '32px',
-          }}>TỚI DỰ LỄ THÀNH HÔN</Typography>
-        </Stack>
-        <Carousel />
-      </Stack>
-    </>
-  );
-};
