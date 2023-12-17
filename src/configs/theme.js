@@ -61,7 +61,7 @@ theme = createTheme(theme, {
       lineHeight: "40px",
       [theme.breakpoints.down("sm")]: {
         fontSize: 16,
-        fontHeight: '24px',
+        lineHeight: '24px',
       },
     },
     headline2: {
@@ -109,7 +109,7 @@ theme = createTheme(theme, {
       lineHeight: "24px",
       [theme.breakpoints.down("sm")]: {
         fontSize: 12,
-        fontHeight: 16,
+        lineHeight: '16px',
       },
     }
   },
