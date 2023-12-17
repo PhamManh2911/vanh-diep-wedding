@@ -1,5 +1,5 @@
 import { uuid } from 'uuidv4';
-import { forwardRef } from "react";
+import { forwardRef, useState } from "react";
 import { Box, Stack, Typography, useTheme } from "@mui/material";
 
 import { useMedia } from "@/pages/[id]";
@@ -22,11 +22,13 @@ export const AlbumSession = forwardRef(function AlbumSession(_ , ref) {
   const theme = useTheme();
   const { isPhone } = useMedia();
 
+  const [expand, setExpand] = useState(false);
+
   const imagesAlbum = isPhone ? phoneAlbum : desktopAlbum;
   const imageWidth = isPhone ? 146 : 236;
 
   return (
-    <Box width='100vw' height='1035px' ref={ref} position='relative' sx={{ overflow: 'hidden' }}>
+    <Box width='100vw' height={expand ? 'fit-content' : '1035px'} ref={ref} position='relative' sx={{ overflow: 'hidden', transition: theme.transitions.create(['all'], { easing: theme.transitions.easing.sharp, duration: theme.transitions.duration.enteringScreen }) }}>
       <Stack
         width='100%'
         minHeight='100%'
@@ -39,7 +41,7 @@ export const AlbumSession = forwardRef(function AlbumSession(_ , ref) {
         <Typography variant="headline1" color={theme.palette.primary.dark} textAlign="center">
           ALBUM ẢNH CƯỚI
         </Typography>
-        {isPhone ? null : (<IconImg src="/icons/album-deco.svg" />)}
+        {isPhone ? (<IconImg src="/icons/album-deco-phone.svg" />) : (<IconImg src="/icons/album-deco.svg" />)}
         <Typography variant="display" color={theme.palette.primary.dark} textAlign="center">
           Ngày tình về chung đôi
         </Typography>
@@ -67,10 +69,10 @@ export const AlbumSession = forwardRef(function AlbumSession(_ , ref) {
         alignItems: 'center',
         gap: '8px',
         flexShrink: 0,
-        background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.00) 67.31%, #FFF 97.17%)',
+        background: expand ? null : 'linear-gradient(180deg, rgba(255, 255, 255, 0.00) 67.31%, #FFF 97.17%)',
         zIndex: 1001,
       }}>
-        <Button text='Xem thêm' />
+        <Button onClick={() => setExpand(prev => !prev)} text={expand ? 'Thu nhỏ' : 'Xem thêm'} />
       </Box>
     </Box>
   );

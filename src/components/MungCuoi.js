@@ -30,7 +30,7 @@ export const MungCuoiSession = forwardRef(function MungCuoiSession({}, ref) {
   const handleCopyCrypto = async () => {
     setCopiedCrypto(true);
 
-    await navigator.clipboard.writeText(bankNumber);
+    await navigator.clipboard.writeText(cryptoNumber);
     setTimeout(() => {
       setCopiedCrypto(false);
     }, 1000);
@@ -74,17 +74,23 @@ export const MungCuoiSession = forwardRef(function MungCuoiSession({}, ref) {
                 <Typography sx={{ cursor: 'pointer' }} onClick={() => setOpenCrypto(true)} variant="label" color={theme.palette.primary.main}>Or send us gift via Crypto</Typography>
               </Stack>
               <Dialog open={openCrypto} PaperProps={{ sx: { borderRadius: '20px', border: '1px solid #F5F5F5' } }} onClose={() => setOpenCrypto(false)}>
-                <Stack padding='16px' gap='16px' justifyContent='center' alignItems='center' >
-                  <Box onClick={() => setOpenCrypto(false)} sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', width: '100%' }}>
+                <Stack justifyContent='center' alignItems='center' >
+                  <Box onClick={() => setOpenCrypto(false)} sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', width: '100%', padding: '16px' }}>
                     <IconImg src="/icons/close.svg" sx={{ width: 32, height: 32, backgroundColor: '#F5F5F5', borderRadius: '50%', cursor: 'pointer' }} imageSx={{ width: 24, height: 24 }} />
                   </Box>
-                  <IconImg src="/images/crypto-groom.png" sx={{ width: 360, height: 360, borderRadius: '36px', border: `12px solid ${theme.palette.primary.main}` }} imageSx={{ width: 320, height: 320 }} />
-                  <Stack gap='16px' justifyContent='center' alignItems='center' padding='16px'>
-                    <Typography variant="title" color='black'>Scan address to send wedding gift to us</Typography>
-                    <Box sx={{ display: 'flex', padding: '8px 16px', justifyContent: 'space-between', alignItems: 'center', borderRadius: '56px', background: theme.palette.primary.light, width: '100%' }}>
-                      <Typography sx={{ color: 'black', fontFamily: 'Sans Serif', fontSize: '22px', fontWeight: '400', lineHeight: '28px' }}>{cryptoNumber}</Typography>
-                      <Button type="outlined" onClick={handleCopyCrypto} text={copiedCrypto ? 'Copied' : ' Copy '} disable={copiedCrypto} />
-                    </Box>
+                  <Stack padding='0 32px 32px' gap='20px' justifyContent='center' alignItems='center'>
+                    {isPhone ? (
+                      <IconImg src="/images/crypto-groom.png" sx={{ width: 270, height: 270, borderRadius: '24px', border: `8px solid ${theme.palette.primary.main}` }} imageSx={{ width: 240, height: 240 }} />
+                    ) : (
+                      <IconImg src="/images/crypto-groom.png" sx={{ width: 400, height: 400, borderRadius: '24px', border: `12px solid ${theme.palette.primary.main}` }} imageSx={{ width: 360, height: 360 }} />
+                    )}
+                    <Stack gap='16px' justifyContent='center' alignItems='center' padding='16px'>
+                      <Typography variant="title" color='black'>Scan address to send wedding gift to us</Typography>
+                      <Box sx={{ display: 'flex', padding: '8px 16px', justifyContent: 'space-between', alignItems: 'center', borderRadius: '56px', background: theme.palette.primary.light, width: '100%' }}>
+                        <Typography variant="title" color='black'>0x83cfd7215e5...c79b</Typography>
+                        <Button type="outlined" onClick={handleCopyCrypto} text={copiedCrypto ? 'Copied' : ' Copy '} disable={copiedCrypto} />
+                      </Box>
+                    </Stack>
                   </Stack>
                 </Stack>
               </Dialog>
