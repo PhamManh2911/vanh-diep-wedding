@@ -1,13 +1,41 @@
+import { nha } from "@/configs/app";
+import { useMedia } from "@/pages/[id]";
 import { Box, Stack, Typography, useTheme } from "@mui/material";
 import { forwardRef } from "react";
 
 export const CoupleSession = forwardRef(function Couple(_, ref) {
   const theme = useTheme();
+  const { isPhone } = useMedia();
+  const nhaTrai = nha === 'trai';
 
-  return (
+  return isPhone ? (
+    nhaTrai ? (
+      <Box height={780}>
+        <Stack sx={{
+          background: `linear-gradient(180deg, rgba(247, 250, 255, 0.00) 0%, rgba(247, 250, 255, 0.00) 10.66%, rgba(247, 250, 255, 0.00) 35.92%), linear-gradient(180deg, rgba(247, 250, 255, 0.20) 0%, rgba(247, 250, 255, 0.00) 28.33%), linear-gradient(180deg, rgba(255, 255, 255, 0.20) 8.85%, rgba(247, 250, 255, 0.00) 36.46%), linear-gradient(180deg, rgba(255, 255, 255, 0.20) 4.2%, rgba(247, 250, 255, 0.00) 36.68%), url("/images/couple-groom.png") 50% / cover no-repeat`,
+          boxShadow: '10px 10px 100px 0px #F7FAFF inset',
+          position: 'relative',
+          height: '100%'
+        }}>
+          <Typography variant="headline1" color={theme.palette.neutral.dark} sx={{ position: 'absolute', top: '32px', left: '50%', transform: 'translateX(-50%)' }}>CÔ DÂU & CHÚ RỂ</Typography>
+        </Stack>
+      </Box>
+    ) : (
+      <Box height={780}>
+        <Stack sx={{
+          background: `linear-gradient(180deg, rgba(247, 250, 255, 0.00) 0%, rgba(247, 250, 255, 0.00) 10.66%, rgba(247, 250, 255, 0.00) 35.92%), linear-gradient(180deg, rgba(247, 250, 255, 0.20) 0%, rgba(247, 250, 255, 0.00) 28.33%), linear-gradient(180deg, rgba(255, 255, 255, 0.20) 8.85%, rgba(247, 250, 255, 0.00) 36.46%), linear-gradient(180deg, rgba(255, 255, 255, 0.20) 4.2%, rgba(247, 250, 255, 0.00) 36.68%), url("/images/couple-bride.png") 50% / cover no-repeat`,
+          boxShadow: '10px 10px 100px 0px #F7FAFF inset',
+          position: 'relative',
+          height: '100%'
+        }}>
+          <Typography variant="headline1" color={theme.palette.neutral.dark} sx={{ position: 'absolute', top: '32px', left: '50%', transform: 'translateX(-50%)' }}>CÔ DÂU & CHÚ RỂ</Typography>
+        </Stack>
+      </Box>
+    )
+  ) : (
     <Box
       ref={ref}
-      height='100vh'
+      height={632}
       alignSelf='stretch'
       sx={{
         background: `linear-gradient(180deg, rgba(247, 250, 255, 0.00) 0%, rgba(247, 250, 255, 0.00) 10.66%, rgba(247, 250, 255, 0.00) 35.92%), linear-gradient(180deg, rgba(247, 250, 255, 0.20) 0%, rgba(247, 250, 255, 0.00) 28.33%), linear-gradient(180deg, rgba(255, 255, 255, 0.20) 8.85%, rgba(247, 250, 255, 0.00) 36.46%), linear-gradient(180deg, rgba(255, 255, 255, 0.20) 4.2%, rgba(247, 250, 255, 0.00) 36.68%), url("/images/couple.jpg") 50% / cover no-repeat`,
@@ -18,9 +46,9 @@ export const CoupleSession = forwardRef(function Couple(_, ref) {
       <Box sx={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', gap: '16px', position: 'absolute', top: '8%', left: '50%', transform: 'translateX(-50%)' }}>
         <Typography variant="headline1" color={theme.palette.neutral.dark} textAlign='center'>CÔ DÂU & CHÚ RỂ</Typography>
       </Box>
-      <Box sx={{ display: 'inline-flex', justifyContent: 'center', alignItems: 'flex-start', gap: '18vw' }}>
-        <Box sx={{ display: 'flex', width: '38vw', height: '78vh', justifyContent: 'center', alignItems: 'center', borderRadius: '480px', background: `radial-gradient(50% 50% at 50% 50%, #F7FAFF 0%, rgba(247, 250, 255, 0.75) 32.29%, rgba(247, 250, 255, 0.40) 63.54%, rgba(247, 250, 255, 0.00) 100%)` }}>
-          <Stack justifyContent='center' alignItems='center' alignSelf='stretch' flex='1 0 0'>
+      <Box sx={{ display: 'inline-flex', justifyContent: 'center', alignItems: 'flex-start', gap: '256px', padding: '30px', width: '100%', height: '100%' }}>
+        <Box sx={{ display: 'flex', height: '100%', justifyContent: 'center', alignItems: 'center', borderRadius: '480px', background: `radial-gradient(50% 50% at 50% 50%, #F7FAFF 0%, rgba(247, 250, 255, 0.75) 32.29%, rgba(247, 250, 255, 0.40) 63.54%, rgba(247, 250, 255, 0.00) 100%)` }}>
+          <Stack justifyContent='center' alignItems='center' alignSelf='stretch' flex='1 0 0' height='100%'>
             <Box sx={{ display: 'flex', height: 72, padding: '12px 4px 12px 16px', justifyContent: 'center', alignItems: 'center', alignSelf: 'stretch' }}>
               <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '16px' }}>
                 <Stack width={236} justifyContent='center' alignItems='center' gap='4px'>
@@ -51,8 +79,8 @@ export const CoupleSession = forwardRef(function Couple(_, ref) {
           </Stack>
         </Box>
 
-        <Box sx={{ display: 'flex', width: '38vw', height: '78vh', justifyContent: 'center', alignItems: 'center', borderRadius: '480px', background: `radial-gradient(50% 50% at 50% 50%, #F7FAFF 0%, rgba(247, 250, 255, 0.75) 32.29%, rgba(247, 250, 255, 0.40) 63.54%, rgba(247, 250, 255, 0.00) 100%)` }}>
-          <Stack justifyContent='center' alignItems='center' alignSelf='stretch' flex='1 0 0'>
+        <Box sx={{ display: 'flex', height: '100%', justifyContent: 'center', alignItems: 'center', borderRadius: '480px', background: `radial-gradient(50% 50% at 50% 50%, #F7FAFF 0%, rgba(247, 250, 255, 0.75) 32.29%, rgba(247, 250, 255, 0.40) 63.54%, rgba(247, 250, 255, 0.00) 100%)` }}>
+          <Stack justifyContent='center' alignItems='center' alignSelf='stretch' flex='1 0 0' height='100%'>
             <Box sx={{ display: 'flex', height: 72, padding: '12px 4px 12px 16px', justifyContent: 'center', alignItems: 'center', alignSelf: 'stretch' }}>
               <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '16px' }}>
                 <Stack width={236} justifyContent='center' alignItems='center' gap='4px'>

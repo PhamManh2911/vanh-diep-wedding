@@ -1,6 +1,7 @@
 import { Box, Stack, Typography, useTheme } from "@mui/material";
 import { useEffect, useState } from "react";
 import IconImg from "./IconImg";
+import { nha } from "@/configs/app";
 
 const phoneImages = [
   "/images/image-phone1.png",

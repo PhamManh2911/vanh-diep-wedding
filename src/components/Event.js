@@ -11,7 +11,7 @@ export const EventSession = forwardRef(function EventSession(_, ref) {
   const nhaTrai = nha === 'trai';
 
   return (
-    <Stack ref={ref} padding={isPhone ? '16px 0' : '32px 0'} alignItems='center' justifyContent='center' gap={isPhone ? '8px' : '32px'}>
+    <Stack ref={ref} padding={isPhone ? '16px 0' : '32px 0 64px'} alignItems='center' justifyContent='center' gap={isPhone ? '8px' : '32px'}>
       <Typography variant="headline1" color={theme.palette.neutral.dark} textAlign='center'>SỰ KIỆN CHÍNH</Typography>
       <Typography variant="display" color={theme.palette.neutral.dark} textAlign="center">Save The Date</Typography>
       <Box sx={{ display: 'flex', padding: isPhone ? '0' : '0px 32px', justifyContent: 'center', alignItems: 'center', gap: isPhone ? '16px' : '32px', flexDirection: isPhone ? 'column' : 'row' }}>
