@@ -3,13 +3,13 @@ import { appHostname } from "@/configs/app";
 import { Stack, useMediaQuery, useTheme } from "@mui/material";
 import { createContext, useContext, useRef } from "react";
 import { CountDown } from "@/components/CountDown";
-import { useSearchParams } from "next/navigation";
 import { EventSession } from "@/components/Event";
 import { CoupleSession } from "@/components/Couple";
 import { TimelineSession } from "@/components/Timeline";
 import { AlbumSession } from "@/components/Album";
 import { MungCuoiSession } from "@/components/MungCuoi";
 import { InvitationSession } from "@/components/Invitation";
+import { Form } from "@/components/Form";
 
 const UserContext = createContext();
 
@@ -34,7 +34,6 @@ export async function getServerSideProps(context) {
 
 export default function Wedding({ user }) {
   const { username } = user;
-  const searchParams = useSearchParams();
 
   const theme = useTheme();
   const isPhone = useMediaQuery(theme.breakpoints.down("sm"));
@@ -54,6 +53,7 @@ export default function Wedding({ user }) {
         <Stack>
           {/* <Box sx={{ background: `url("/images/left-decoration.png")`, position: 'absolute', top: '21px', width: '20vw', height: '55vh' }}></Box>
           <Box sx={{ background: `url("/images/right-decoration.png")`, position: 'absolute', right: "0px", top: '40px', width: '20vw', height: '55vh' }}></Box> */}
+          <Form />
           <InvitationSession
             username={username}
             clickEvent={() => handleScrollToView(eventRef.current)}

@@ -7,12 +7,12 @@ import { useState } from "react";
 import { nha } from "@/configs/app";
 import { SlideCarousel } from "./SlideCarousel";
 
-const NavPhoneStack = styled(Stack)(({ theme, openNav }) => ({
+const NavPhoneStack = styled(Stack)(({ theme, opennav }) => ({
   justifyContent: 'center',
   alignItems: 'center',
-  padding: openNav ? '8px' : 0,
+  padding: opennav ? '8px' : 0,
   gap: '5px',
-  height: openNav ? 191 : 0,
+  height: opennav ? 191 : 0,
   overflow: 'hidden',
   transition: theme.transitions.create(['all'], {
     easing: theme.transitions.easing.sharp,
@@ -35,7 +35,7 @@ export function InvitationSession({ username, clickEvent, clickCouple, clickMung
             <IconImg src='/icons/vnd.svg' width={24} height={24} />
             <IconImg src={openNav ? "/icons/close.svg" : "/icons/nav.svg"} width={24} height={24} onClick={() => setOpenNav(prev => !prev)} sx={{ cursor: 'pointer' }} />
           </Box>
-          <NavPhoneStack openNav={openNav ? 1 : 0}>
+          <NavPhoneStack opennav={openNav ? 1 : 0}>
             <Button type="text" text='Sự kiện chính' onClick={clickEvent} />
             <Button type='text' text='Cặp đôi' onClick={clickCouple} />
             <Button type='text' text='Album cưới' onClick={clickAlbum} />

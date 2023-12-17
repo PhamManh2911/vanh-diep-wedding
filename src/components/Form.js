@@ -1,17 +1,19 @@
 import { Box, Stack, Typography, useTheme } from "@mui/material";
 import IconImg from "./IconImg";
 import { Button } from "./Buttons";
-import { useNha, useUser } from "@/pages/[id]";
+import { useMedia, useUser } from "@/pages/[id]";
 import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
+import { nha } from "@/configs/app";
 
 function FormHeader({ close }) {
   const theme = useTheme();
-  const { nhaTrai } = useNha();
+  const nhaTrai = nha === 'trai'
+  const { isPhone } = useMedia();
 
   return (
-    <Stack width={375} padding='13px 24px' justifyContent='center' alignItems='center' borderBottom='1px solid #F5F5F5'>
-      <Box sx={{ display: 'flex', width: 327, justifyContent: 'space-between', alignItems: 'center' }}>
+    <Stack width='100%' padding={isPhone ? '8px 24px' : '13px 24px'} justifyContent='center' alignItems='center' borderBottom='1px solid #F5F5F5'>
+      <Box sx={{ display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center' }}>
         <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: '24px' }}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
             <IconImg src="/icons/logo-chat.svg" sx={{ width: 44, height: 44 }} />
@@ -36,7 +38,8 @@ function FormBody() {
   const theme = useTheme();
 
   const { user } = useUser();
-  const { nhaTrai } = useNha();
+  const { isPhone } = useMedia();
+  const nhaTrai = nha === 'trai';
 
   const [record, setRecord] = useState(null);
   const [join, setJoin] = useState(false);
@@ -88,15 +91,15 @@ function FormBody() {
   }, [fetchFormData]);
 
   return (
-    <Stack alignItems='center' gap='32px' padding="16px 24px 0">
-      <Stack alignItems='flex-start' gap='16px'>
+    <Stack alignItems='center' gap={isPhone ? '16px' : '32px'} padding={isPhone ? '8px 24px 32px' : "16px 24px 32px"} width="100%">
+      <Stack alignItems='flex-start' gap='16px' width='100%'>
         <Stack alignItems='flex-start' gap='2px'>
-          <Typography variant="title" color="#202325" width={296}>
+          <Typography variant="title" color="#202325" textAlign="left">
             {`Xin chào ${user.username}!`}
           </Typography>
         </Stack>
         <Stack alignItems='flex-start' gap='2px'>
-          <Typography variant="body" color="#202325" >
+          <Typography variant="body" color="#202325" textAlign='left' >
             Vui lòng xác nhận khả năng tham dự để gia đình tiếp đón chu đáo!
           </Typography>
         </Stack>
@@ -175,23 +178,80 @@ function FormBody() {
   );
 }
 
-export function Form({ user }) {
+export function Form() {
+  const { user } = useUser();
   const theme = useTheme();
+  const { isPhone } = useMedia();
+
+  const [open, setOpen] = useState(false);
+  const [pos, setPos] = useState(isPhone ? { left: 220, top: 600 } : { left: 850, top: 680 });
+
+  const handleDrag = (event) => {
+    event.preventDefault();
+    const { clientX, clientY } = event;
+
+    if (!clientX || !clientY) return;
+    setPos({ left: clientX, top: clientY });
+  }
+
+  useEffect(() => {
+    setPos(isPhone ? { left: 220, top: 600 } : { left: 850, top: 680 });
+  }, [isPhone]);
 
   return (
-    <Box sx={{
-      display: 'inline-flex',
-      paddingBottom: '32px',
-      flexDirection: 'column',
-      alignItems: 'center',
-      gap: '16px',
-      borderRadius: '20px',
-      border: '1px solid #F5F5F5',
-      background: theme.palette.neutral.light,
-      width: 375,
-    }}>
-      <FormHeader />
-      <FormBody user={user} />
-    </Box>
+    <>
+      {isPhone && open && (
+        // <Box sx={{ width: '100vw', height: '100vh' }}>
+          <Box sx={{
+            display: 'inline-flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            borderRadius: '20px',
+            border: '1px solid #F5F5F5',
+            background: theme.palette.neutral.light,
+            width: isPhone ? 328 : 375,
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            zIndex: 1010,
+            boxShadow: '0px 0px 10px 0px rgba(88, 131, 191, 0.50)',
+          }}>
+            <FormHeader close={() => setOpen(false)} />
+            <FormBody user={user} />
+          </Box>
+        // </Box>
+      )}
+      <Box sx={{ position: 'fixed', ...pos, zIndex: 1005 }} onDrag={handleDrag} draggable="true" >
+        {!isPhone && open && (
+          <Box sx={{
+            display: 'inline-flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            borderRadius: '20px',
+            border: '1px solid #F5F5F5',
+            background: theme.palette.neutral.light,
+            width: isPhone ? 328 : 375,
+            ...(isPhone ? {
+              top: '50vh',
+              left: '50vw',
+              transform: 'translate(-50%, -50%)',
+            } : {
+              position: 'absolute',
+              transform: 'translate(30px, -100%)',
+            })
+          }}>
+            <FormHeader close={() => setOpen(false)} />
+            <FormBody user={user} />
+          </Box>
+        )}
+        <Box sx={{ display: 'flex', padding: '16px 24px', gap: '16px', justifyContent: 'center', alignItems: 'center' }}>
+          <Box padding='8px 16px' borderRadius='24px' border={`1px solid ${theme.palette.neutral.midLight}`} sx={{ background: `${theme.palette.neutral.light}` }}>
+            <Typography variant="body" color={theme.palette.neutral.dark}>Xác nhận khả năng tham gia của bạn!</Typography>
+          </Box>
+          <IconImg width={60} height={60} src="/icons/chatbot.svg" onClick={() => setOpen(prev => !prev)} sx={{ cursor: 'pointer' }} />
+        </Box>
+      </Box>
+    </>
   );
 }
