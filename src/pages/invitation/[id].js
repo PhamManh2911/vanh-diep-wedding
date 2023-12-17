@@ -17,16 +17,24 @@ export default function Invitation({ user }) {
   const nhaTrai = nha === 'trai';
 
   return (
-    <Box width={1327} height={1030} sx={{ position: 'relative' }}>
+    <Box width={2654} height={2060} sx={{ position: 'relative' }}>
       <Box
         width='100%'
         height='100%'
         sx={{ background: `url("${nhaTrai ? "/images/thiep-moi-nha-trai.png" : "/images/thiep-moi-nha-gai.png"}"), lightgray 50% / cover no-repeat` }}
       ></Box>
-      <Typography
-        sx={{ color: theme.palette.primary.main, textAlign: 'right', position:"absolute", top: 240, left: '50%', transform: "translateX(-50%)" }}
-        variant="display"
-      >{user.username}</Typography>
+      <Typography sx={{
+        color: theme.palette.primary.main,
+        textAlign: 'right',
+        position:"absolute",
+        top: 480,
+        left: '50%',
+        transform: "translateX(-50%)",
+        fontFamily: "Bellissima",
+        fontSize: '114px',
+        fontWeight: '400',
+        lineHeight: '128px',
+      }}>{user.username}</Typography>
     </Box>
   )
 }

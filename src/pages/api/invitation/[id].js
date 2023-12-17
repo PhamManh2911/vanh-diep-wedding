@@ -19,8 +19,8 @@ export default async function handler(req, res) {
       params: {
         access_key: apiflashAccessKey,
         url: `${appHostname}/invitation/${id}`,
-        width: 1327,
-        height: 1030,
+        width: 2654,
+        height: 2060,
         // for testing in ngrok
         user_agent: '/non-standard',
       },
