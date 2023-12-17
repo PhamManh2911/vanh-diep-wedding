@@ -16,8 +16,8 @@ function InvitationImage({ src, sx = {}, imageSx, ...props }) {
 	if (sx && sx.width && !sx.height) sx.height = 'auto';
 	if (sx && sx.height && !sx.width) sx.width = 'auto';
   const [loaded, setLoaded] = useState(false);
-  const [copied, setCopied] = useState(false);
-  const [downloaded, setDownloaded] = useState(false);
+  // const [copied, setCopied] = useState(false);
+  // const [downloaded, setDownloaded] = useState(false);
   const imageRef = useRef();
 
   const blobData = useMemo(async () => {
@@ -25,33 +25,33 @@ function InvitationImage({ src, sx = {}, imageSx, ...props }) {
     return await response.blob();
   }, [src]);
 
-  const handleDownloadImage = () => {
-    setDownloaded(true);
-    const url = window.URL.createObjectURL(blobData);
-    const a = document.createElement('a');
+  // const handleDownloadImage = () => {
+  //   setDownloaded(true);
+  //   const url = window.URL.createObjectURL(blobData);
+  //   const a = document.createElement('a');
 
-    a.style.display = 'none';
-    a.href = src;
-    a.download = 'thiep_cuoi'
-    document.body.appendChild(a);
-    a.click();
-    window.URL.revokeObjectURL(url);
+  //   a.style.display = 'none';
+  //   a.href = src;
+  //   a.download = 'thiep_cuoi'
+  //   document.body.appendChild(a);
+  //   a.click();
+  //   window.URL.revokeObjectURL(url);
 
-    setTimeout(() => {
-      setDownloaded(false);
-    }, 1000);
-  }
+  //   setTimeout(() => {
+  //     setDownloaded(false);
+  //   }, 1000);
+  // }
 
-  const handleCopyImage = async () => {
-    setCopied(true);
-    const data = [new ClipboardItem({ [blobData.type]: blobData })];
+  // const handleCopyImage = async () => {
+  //   setCopied(true);
+  //   const data = [new ClipboardItem({ [blobData.type]: blobData })];
 
-    await navigator.clipboard.write(data);
+  //   await navigator.clipboard.write(data);
 
-    setTimeout(() => {
-      setCopied(false);
-    }, 1000);
-  }
+  //   setTimeout(() => {
+  //     setCopied(false);
+  //   }, 1000);
+  // }
 
   useEffect(() => {
     if(imageRef.current?.complete) setLoaded(true)
@@ -65,10 +65,10 @@ function InvitationImage({ src, sx = {}, imageSx, ...props }) {
       position: 'relative',
       ...sx,
     }} { ...props }>
-      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px', position: 'absolute', top: 24, right: 24 }}>
+      {/* <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px', position: 'absolute', top: 24, right: 24 }}>
         <Button text="Tải xuống" type="outlined" onClick={handleDownloadImage} disable={downloaded} /> 
         <Button text={copied ? "Copied" : "Copy"} type="filled" onClick={handleCopyImage} disable={copied} />
-      </Box>
+      </Box> */}
       <IconImage src={src} sx={{ display: loaded ? 'block' : 'none', ...imageSx }} ref={imageRef} onLoad={() => setLoaded(true)} />
       {!loaded && (
         <Skeleton
