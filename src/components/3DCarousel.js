@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import IconImg from "./IconImg";
 import { Box, Stack, Typography, styled, useTheme } from "@mui/material";
+import { nha } from "@/configs/app";
 
 const zIndex = 1000;
 const opacity = 1;
@@ -66,6 +67,7 @@ const IconImage = styled('img')({
 export function ThreeDCarousel() {
   const theme = useTheme();
   const [current, setCurrent] = useState(0);
+  const nhaTrai = nha === 'trai';
 
   const handleNext = () => {
     setCurrent(prevCurrent => prevCurrent === 4 ? 0 : prevCurrent + 1);
@@ -100,7 +102,7 @@ export function ThreeDCarousel() {
           lineHeight: '64px',
           letterSpacing: '3.2px',
         }}>
-          Việt Anh &  Ngọc Diệp
+          {nhaTrai ? 'Việt Anh &  Ngọc Diệp' : 'Ngọc Diệp &  Việt Anh'}
         </Typography>
         {images.map((image, index) => (
           <Box
