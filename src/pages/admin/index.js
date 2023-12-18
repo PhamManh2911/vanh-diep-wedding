@@ -103,8 +103,8 @@ export default function AdminPage() {
     const response = await axios.post(`${appHostname}/api/users`, { userName });
     const user = response.data.data.user;
 
-    setImageUrl(`${appHostname}/api/invitation/${user.id}`);
-    setUrl(`${appHostname}/${user.id}?name=${userName}&form=${form}&removeCache=true`);
+    setImageUrl(`${appHostname}/api/invitation/${user.id}?removeCache=true`);
+    setUrl(`${appHostname}/${user.id}?name=${userName}&form=${form}`);
     setLoading(false);
   }
 
