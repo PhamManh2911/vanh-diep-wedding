@@ -267,17 +267,17 @@ export function Form() {
     isPhone ? { left: 220, top: 500 } : { left: 850, top: 680 }
   );
   const form = searchParams.get("form");
-  console.log(form);
-  const handleDrag = (event) => {
-    event.preventDefault();
-    const { clientX, clientY } = event;
 
-    if (!clientX || !clientY) return;
-    setPos({ left: clientX, top: clientY });
-  };
+  // const handleDrag = (event) => {
+  //   event.preventDefault();
+  //   const { clientX, clientY } = event;
+
+  //   if (!clientX || !clientY) return;
+  //   setPos({ left: clientX, top: clientY });
+  // };
 
   useEffect(() => {
-    setPos(isPhone ? { left: 220, top: 600 } : { left: 850, top: 680 });
+    setPos(isPhone ? { left: -50, top: 600 } : { left: 850, top: 680 });
   }, [isPhone]);
 
   return form === "true" ? (
@@ -286,14 +286,13 @@ export function Form() {
         <Dialog
           open={open}
           onClose={() => setOpen(false)}
-          PaperProps={{ sx: {  borderRadius: "20px", border: "1px solid #F5F5F5" } }}
+          PaperProps={{ sx: {  borderRadius: "20px", border: "1px solid #F5F5F5", width: 328 } }}
         >
           <Box
             sx={{
               display: "inline-flex",
               flexDirection: "column",
               alignItems: "center",
-              width: isPhone ? 328 : 375,
             }}
           >
             <FormHeader close={() => setOpen(false)} />
@@ -303,8 +302,6 @@ export function Form() {
       )}
       <Box
         sx={{ position: "fixed", ...pos, zIndex: 1005 }}
-        onDrag={handleDrag}
-        draggable="true"
       >
         {!isPhone && open && (
           <Box
@@ -315,7 +312,7 @@ export function Form() {
               borderRadius: "20px",
               border: "1px solid #F5F5F5",
               background: theme.palette.neutral.light,
-              width: isPhone ? 328 : 375,
+              width: 375,
               ...(isPhone
                 ? {
                     top: "50vh",
@@ -337,20 +334,23 @@ export function Form() {
             display: "flex",
             padding: "16px 24px",
             gap: "16px",
-            justifyContent: "center",
+            width: 440,
+            justifyContent: "flex-end",
             alignItems: "center",
           }}
         >
-          <Box
-            padding="8px 16px"
-            borderRadius="24px"
-            border={`1px solid ${theme.palette.neutral.midLight}`}
-            sx={{ background: `${theme.palette.neutral.light}` }}
-          >
-            <Typography variant="body" color={theme.palette.neutral.dark}>
-              Xác nhận khả năng tham gia của bạn!
-            </Typography>
-          </Box>
+          {!open && (
+            <Box
+              padding="8px 16px"
+              borderRadius="24px"
+              border={`1px solid ${theme.palette.neutral.midLight}`}
+              sx={{ background: `${theme.palette.neutral.light}` }}
+            >
+              <Typography variant="body" color={theme.palette.neutral.dark}>
+                Xác nhận khả năng tham gia của bạn!
+              </Typography>
+            </Box>
+          )}
           <IconImg
             width={60}
             height={60}
