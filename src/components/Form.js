@@ -66,7 +66,7 @@ function FormBody() {
   const nhaTrai = nha === "trai";
 
   const [record, setRecord] = useState(null);
-  const [join, setJoin] = useState(false);
+  const [join, setJoin] = useState(true);
   const [day, setDay] = useState([]);
   const [error, setError] = useState(false);
 
@@ -186,7 +186,7 @@ function FormBody() {
               sx={{
                 display: "flex",
                 justifyContent: "center",
-                alignItems: "flex-start",
+                alignItems: "center",
                 gap: "8px",
               }}
             >
@@ -217,7 +217,7 @@ function FormBody() {
               sx={{
                 display: "flex",
                 justifyContent: "center",
-                alignItems: "flex-start",
+                alignItems: "center",
                 gap: "8px",
               }}
             >
@@ -277,7 +277,7 @@ export function Form() {
   // };
 
   useEffect(() => {
-    setPos(isPhone ? { left: -50, top: 600 } : { left: 850, top: 680 });
+    setPos(isPhone ? { right: 10, bottom: 140 } : { right: 20, bottom: 60 });
   }, [isPhone]);
 
   return form === "true" ? (
@@ -339,21 +339,19 @@ export function Form() {
             alignItems: "center",
           }}
         >
-          {!open && (
-            <Box
-              padding="8px 16px"
-              borderRadius="24px"
-              border={`1px solid ${theme.palette.neutral.midLight}`}
-              sx={{ background: `${theme.palette.neutral.light}` }}
-            >
-              <Typography variant="body" color={theme.palette.neutral.dark}>
-                Xác nhận khả năng tham gia của bạn!
-              </Typography>
-            </Box>
-          )}
+          <Box
+            padding={isPhone ? "0px 8px 4px 8px" : "8px 16px"}
+            borderRadius="24px"
+            border={`1px solid ${theme.palette.neutral.midLight}`}
+            sx={{ background: `${theme.palette.neutral.light}` }}
+          >
+            <Typography variant="body" color={theme.palette.neutral.dark}>
+              Xác nhận khả năng tham dự
+            </Typography>
+          </Box>
           <IconImg
-            width={60}
-            height={60}
+            width={isPhone ? 40 : 60}
+            height={isPhone ? 40 : 60}
             src="/icons/chatbot.svg"
             onClick={() => setOpen((prev) => !prev)}
             sx={{ cursor: "pointer" }}
