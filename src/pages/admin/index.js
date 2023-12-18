@@ -104,7 +104,7 @@ export default function AdminPage() {
     const user = response.data.data.user;
 
     setImageUrl(`${appHostname}/api/invitation/${user.id}`);
-    setUrl(`${appHostname}/${user.id}?name=${userName}&form=${form}`);
+    setUrl(`${appHostname}/${user.id}?name=${userName}&form=${form}&removeCache=true`);
     setLoading(false);
   }
 
