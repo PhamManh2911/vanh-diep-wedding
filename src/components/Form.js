@@ -70,6 +70,8 @@ function FormBody() {
   const [day, setDay] = useState([]);
   const [error, setError] = useState(false);
 
+  const [submitted, setSubmitted] = useState(!!record);
+
   const handleSubmit = useCallback(async () => {
     if (join && day.length === 0) {
       setError(true);
@@ -117,6 +119,10 @@ function FormBody() {
   }, [user.id, nhaTrai]);
 
   useEffect(() => {
+    setSubmitted(!!record);
+  }, [record]);
+
+  useEffect(() => {
     setDay([]);
   }, [join]);
 
@@ -128,7 +134,24 @@ function FormBody() {
     fetchFormData();
   }, [fetchFormData]);
 
-  return (
+  return submitted ? (
+    <Stack
+      alignItems="center"
+      padding={isPhone ? "8px 16px" : "16px 32px"}
+      gap={isPhone ? "8px" : "32px"}
+      height={444}
+    >
+      <Typography
+        textAlign="left"
+        color="#202325"
+        variant="title"
+      >{`Cảm ơn ${user.username}!`}</Typography>
+      <IconImg src="/icons/thankyou.svg" sx={{ width: 128, height: 85 }} />
+      <Typography textAlign="right" color="#202325" variant="title">
+        Hẹn gặp lại!
+      </Typography>
+    </Stack>
+  ) : (
     <Stack
       alignItems="center"
       gap={isPhone ? "16px" : "32px"}
@@ -280,13 +303,19 @@ export function Form() {
     setPos(isPhone ? { right: 10, bottom: 140 } : { right: 20, bottom: 60 });
   }, [isPhone]);
 
-  return form === "true" ? (
+  return form === "true" && !user.record_id ? (
     <>
       {isPhone && (
         <Dialog
           open={open}
           onClose={() => setOpen(false)}
-          PaperProps={{ sx: {  borderRadius: "20px", border: "1px solid #F5F5F5", width: 328 } }}
+          PaperProps={{
+            sx: {
+              borderRadius: "20px",
+              border: "1px solid #F5F5F5",
+              width: 328,
+            },
+          }}
         >
           <Box
             sx={{
@@ -300,9 +329,7 @@ export function Form() {
           </Box>
         </Dialog>
       )}
-      <Box
-        sx={{ position: "fixed", ...pos, zIndex: 1005 }}
-      >
+      <Box sx={{ position: "fixed", ...pos, zIndex: 1005 }}>
         {!isPhone && open && (
           <Box
             sx={{

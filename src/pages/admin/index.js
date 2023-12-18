@@ -104,7 +104,13 @@ export default function AdminPage() {
     const user = response.data.data.user;
 
     setImageUrl(`${appHostname}/api/invitation/${user.id}?removeCache=true`);
-    setUrl(`${appHostname}/${user.id}?name=${userName}&form=${form}`);
+    const queryParams = {
+      name: userName,
+      form,
+    };
+    const searchParams = new URLSearchParams(queryParams);
+
+    setUrl(`${appHostname}/${user.id}?${searchParams.toString()}`);
     setLoading(false);
   }
 

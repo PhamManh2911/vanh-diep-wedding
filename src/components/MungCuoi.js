@@ -97,7 +97,7 @@ export const MungCuoiSession = forwardRef(function MungCuoiSession({}, ref) {
             }}
           >
             <IconImg
-              src={nhaTrai ? "/images/qr-groom.png" : "/image/qr-bride.png"}
+              src={nhaTrai ? "/images/qr-groom.png" : "/images/qr-bride.png"}
               sx={{
                 width: 226,
                 height: 224,
