@@ -1,4 +1,4 @@
-import { Box, Stack, Typography, useTheme } from "@mui/material";
+import { Box, Dialog, Stack, Typography, useTheme } from "@mui/material";
 import IconImg from "./IconImg";
 import { useSearchParams } from "next/navigation";
 import { Button } from "./Buttons";
@@ -264,7 +264,7 @@ export function Form() {
   const searchParams = useSearchParams();
   const [open, setOpen] = useState(false);
   const [pos, setPos] = useState(
-    isPhone ? { left: 220, top: 600 } : { left: 850, top: 680 }
+    isPhone ? { left: 220, top: 500 } : { left: 850, top: 680 }
   );
   const form = searchParams.get("form");
   console.log(form);
@@ -282,29 +282,24 @@ export function Form() {
 
   return form === "true" ? (
     <>
-      {isPhone && open && (
-        // <Box sx={{ width: '100vw', height: '100vh' }}>
-        <Box
-          sx={{
-            display: "inline-flex",
-            flexDirection: "column",
-            alignItems: "center",
-            borderRadius: "20px",
-            border: "1px solid #F5F5F5",
-            background: theme.palette.neutral.light,
-            width: isPhone ? 328 : 375,
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            zIndex: 1010,
-            boxShadow: "0px 0px 10px 0px rgba(88, 131, 191, 0.50)",
-          }}
+      {isPhone && (
+        <Dialog
+          open={open}
+          onClose={() => setOpen(false)}
+          PaperProps={{ sx: {  borderRadius: "20px", border: "1px solid #F5F5F5" } }}
         >
-          <FormHeader close={() => setOpen(false)} />
-          <FormBody user={user} />
-        </Box>
-        // </Box>
+          <Box
+            sx={{
+              display: "inline-flex",
+              flexDirection: "column",
+              alignItems: "center",
+              width: isPhone ? 328 : 375,
+            }}
+          >
+            <FormHeader close={() => setOpen(false)} />
+            <FormBody user={user} />
+          </Box>
+        </Dialog>
       )}
       <Box
         sx={{ position: "fixed", ...pos, zIndex: 1005 }}
