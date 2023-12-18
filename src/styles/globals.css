@@ -60,3 +60,17 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+
+.background-image {
+  overflow: hidden;
+  transition: background-position 0.3s ease-in-out;
+}
+
+.slide-in {
+  background-position: 100% 0; /* Hoặc giá trị bạn muốn áp dụng khi slide-in */
+}
+
+.slide-out {
+  background-position: 0 0;
+}
