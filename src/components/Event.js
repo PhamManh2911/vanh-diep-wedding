@@ -69,7 +69,7 @@ export const EventSession = forwardRef(function EventSession(_, ref) {
                 color="#000"
                 textAlign={isPhone ? "left" : "center"}
               >
-                {nhaTrai ? "16:00 Chiều" : "16:00 Chiều"}
+                {nhaTrai ? "15:00 Chiều" : "16:00 Chiều"}
               </Typography>
             </Box>
             <Box

@@ -2,6 +2,7 @@ import { Box, Stack, Typography, useMediaQuery, useTheme } from "@mui/material";
 import IconImg from "./IconImg";
 import Image from "next/image";
 import { useMedia } from "@/pages/[id]";
+import { nha } from "@/configs/app";
 
 function VerticalDivider({ disableVertical }) {
   const theme = useTheme();
@@ -112,7 +113,7 @@ function EventDecs({ children, justifyContent, textAlign }) {
 export function TimelineSession() {
   const theme = useTheme();
   const { isPhone } = useMedia();
-
+  const isHomeBoy = nha === "trai"
   return (
     <Stack
       sx={{ padding: isPhone ? "16px" : "64px 0 0"}}
@@ -125,7 +126,7 @@ export function TimelineSession() {
         color={theme.palette.primary.dark}
         textAlign="center"
       >
-        LỄ THÀNH HÔN
+        {isHomeBoy ? "LỄ THÀNH HÔN" : "LỄ VU QUY"}
       </Typography>
       <Typography
         variant="display"
@@ -156,7 +157,7 @@ export function TimelineSession() {
                 textAlign="left"
                 color={theme.palette.neutral.dark}
               >
-                09:00 SÁNG
+                {isHomeBoy? "09:00 SÁNG" : "07:00 SÁNG"}
               </Typography>
               {isPhone ? null : (
                 <Typography
@@ -172,7 +173,8 @@ export function TimelineSession() {
                 textAlign="left"
                 color={theme.palette.neutral.dark}
               >
-                ĐÓN KHÁCH
+                {isHomeBoy? "ĐÓN KHÁCH" : "LÀM LỄ"}
+                
               </Typography>
             </Box>
             <EventDecs justifyContent="flex-start" textAlign="left">
@@ -202,7 +204,7 @@ export function TimelineSession() {
                 textAlign="right"
                 color={theme.palette.neutral.dark}
               >
-                09:30 SÁNG
+                {isHomeBoy ? "09:30 SÁNG": "07:30 SÁNG"}
               </Typography>
               {isPhone ? null : (
                 <Typography
@@ -218,7 +220,7 @@ export function TimelineSession() {
                 textAlign="right"
                 color={theme.palette.neutral.dark}
               >
-                LÀM LỄ
+                {isHomeBoy ? "LÀM LỄ" : "ĐƯA DÂU"}
               </Typography>
             </Box>
             <EventDecs justifyContent="flex-end" textAlign="right">
@@ -252,7 +254,7 @@ export function TimelineSession() {
                 textAlign="left"
                 color={theme.palette.neutral.dark}
               >
-                10:30 SÁNG
+                {isHomeBoy ? "10:30 SÁNG" : "09:30 SÁNG"}
               </Typography>
               {isPhone ? null : (
                 <Typography
@@ -268,7 +270,7 @@ export function TimelineSession() {
                 textAlign="left"
                 color={theme.palette.neutral.dark}
               >
-                NHẬP TIỆC
+                {isHomeBoy ? "NHẬP TIỆC" : "LỄ THÀNH HÔN"}
               </Typography>
             </Box>
             <EventDecs justifyContent="flex-start" textAlign="left">
@@ -298,7 +300,7 @@ export function TimelineSession() {
                 textAlign="right"
                 color={theme.palette.neutral.dark}
               >
-                12:00 SÁNG
+                {isHomeBoy ? "12:00 SÁNG" : "10:30 SÁNG"}
               </Typography>
               {isPhone ? null : (
                 <Typography
@@ -314,7 +316,7 @@ export function TimelineSession() {
                 textAlign="right"
                 color={theme.palette.neutral.dark}
               >
-                GIAO LƯU VĂN NGHỆ
+                { isHomeBoy ? "GIAO LƯU VĂN NGHỆ" : "NHẬP TIỆC"}
               </Typography>
             </Box>
             <EventDecs justifyContent="flex-end" textAlign="left">
