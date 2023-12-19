@@ -1,4 +1,4 @@
-import { Box, Dialog, Stack, Typography, useTheme } from "@mui/material";
+import { Box, Dialog, Stack, Typography, useTheme, CircularProgress } from "@mui/material";
 import IconImg from "./IconImg";
 import { useSearchParams } from "next/navigation";
 import { Button } from "./Buttons";
@@ -69,13 +69,13 @@ function FormBody() {
   const [join, setJoin] = useState(true);
   const [day, setDay] = useState([]);
   const [error, setError] = useState(false);
-
-  const [submitted, setSubmitted] = useState(!!record);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = useCallback(async () => {
     if (join && day.length === 0) {
       setError(true);
     } else {
+      setLoading(true);
       const payload = { join };
 
       payload["31/12/2023"] = day.includes("31/12/2023");
@@ -95,10 +95,12 @@ function FormBody() {
           );
 
       setRecord(data.record);
+      setLoading(false);
     }
   }, [join, day, record, user.id, nhaTrai]);
 
   const fetchFormData = useCallback(async () => {
+    setLoading(true);
     const {
       data: {
         data: { record },
@@ -116,11 +118,8 @@ function FormBody() {
       if (record?.["01/01/2024"]) days.push("01/01/2024");
       return days;
     });
+    setLoading(false);
   }, [user.id, nhaTrai]);
-
-  useEffect(() => {
-    setSubmitted(!!record);
-  }, [record]);
 
   useEffect(() => {
     setDay([]);
@@ -134,149 +133,154 @@ function FormBody() {
     fetchFormData();
   }, [fetchFormData]);
 
-  return submitted ? (
-    <Stack
-      alignItems="center"
-      padding={isPhone ? "8px 16px" : "16px 32px"}
-      gap={isPhone ? "8px" : "32px"}
-      height={444}
-    >
-      <Typography
-        textAlign="left"
-        color="#202325"
-        variant="title"
-      >{`Cảm ơn ${user.username}!`}</Typography>
-      <IconImg src="/icons/thankyou.svg" sx={{ width: 128, height: 85 }} />
-      <Typography textAlign="right" color="#202325" variant="title">
-        Hẹn gặp lại!
-      </Typography>
-    </Stack>
-  ) : (
-    <Stack
-      alignItems="center"
-      gap={isPhone ? "16px" : "32px"}
-      padding={isPhone ? "8px 24px 32px" : "16px 24px 32px"}
-      width="100%"
-    >
-      <Stack alignItems="flex-start" gap="16px" width="100%">
-        <Stack alignItems="flex-start" gap="2px">
-          <Typography variant="title" color="#202325" textAlign="left">
-            {`Xin chào ${user.username}!`}
-          </Typography>
-        </Stack>
-        <Stack alignItems="flex-start" gap="2px">
-          <Typography variant="body" color="#202325" textAlign="left">
-            Vui lòng xác nhận khả năng tham dự để gia đình tiếp đón chu đáo!
-          </Typography>
-        </Stack>
-        <Stack alignItems="flex-start" gap="2px">
-          <Typography variant="label" color="#202325">
-            Khả năng tham dự:
-          </Typography>
-        </Stack>
-        <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>
-          <IconImg
-            src={join ? "/icons/circle-check.svg" : "/icons/circle.svg"}
-            sx={{ cursor: "pointer" }}
-            onClick={() => setJoin(true)}
-          />
+  return loading ? (
+      <Stack width='100%' height={300} justifyContent='center' alignItems='center'>
+        <CircularProgress />
+      </Stack>
+    ) : ( !!record ? (
+      <Stack
+        alignItems="center"
+        padding={isPhone ? "8px 16px" : "16px 32px"}
+        gap={isPhone ? "8px" : "32px"}
+        height={444}
+      >
+        <Typography
+          textAlign="left"
+          color="#202325"
+          variant="title"
+        >{`Cảm ơn ${user.username}!`}</Typography>
+        <IconImg src="/icons/thankyou.svg" sx={{ width: 128, height: 85 }} />
+        <Typography textAlign="right" color="#202325" variant="title">
+          Hẹn gặp lại!
+        </Typography>
+      </Stack>
+    ) : (
+      <Stack
+        alignItems="center"
+        gap={isPhone ? "16px" : "32px"}
+        padding={isPhone ? "8px 24px 32px" : "16px 24px 32px"}
+        width="100%"
+      >
+        <Stack alignItems="flex-start" gap="16px" width="100%">
           <Stack alignItems="flex-start" gap="2px">
-            <Typography variant="body" color="#202325">
-              Tôi sẽ tham gia
+            <Typography variant="title" color="#202325" textAlign="left">
+              {`Xin chào ${user.username}!`}
             </Typography>
           </Stack>
-        </Box>
-        <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>
-          <IconImg
-            src={join ? "/icons/circle.svg" : "/icons/circle-check.svg"}
-            sx={{ cursor: "pointer" }}
-            onClick={() => setJoin(false)}
-          />
           <Stack alignItems="flex-start" gap="2px">
-            <Typography variant="body" color="#202325">
-              Rất tiếc, tôi không tham gia được
+            <Typography variant="body" color="#202325" textAlign="left">
+              Vui lòng xác nhận khả năng tham dự để gia đình tiếp đón chu đáo!
             </Typography>
           </Stack>
-        </Box>
-        {join && (
-          <>
+          <Stack alignItems="flex-start" gap="2px">
+            <Typography variant="label" color="#202325">
+              Khả năng tham dự:
+            </Typography>
+          </Stack>
+          <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            <IconImg
+              src={join ? "/icons/circle-check.svg" : "/icons/circle.svg"}
+              sx={{ cursor: "pointer" }}
+              onClick={() => setJoin(true)}
+            />
             <Stack alignItems="flex-start" gap="2px">
-              <Typography variant="label" color="#202325">
-                Ngày tham dự:
+              <Typography variant="body" color="#202325">
+                Tôi sẽ tham gia
               </Typography>
             </Stack>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                gap: "8px",
-              }}
-            >
-              <IconImg
-                sx={{ cursor: "pointer" }}
-                src={
-                  day.includes("31/12/2023")
-                    ? "/icons/rectangle-checkbox-check.svg"
-                    : "/icons/rectangle-checkbox.svg"
-                }
-                onClick={() =>
-                  setDay((prevDay) =>
-                    prevDay.includes("31/12/2023")
-                      ? prevDay.filter((day) => day !== "31/12/2023")
-                      : [...prevDay, "31/12/2023"]
-                  )
-                }
-              />
+          </Box>
+          <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            <IconImg
+              src={join ? "/icons/circle.svg" : "/icons/circle-check.svg"}
+              sx={{ cursor: "pointer" }}
+              onClick={() => setJoin(false)}
+            />
+            <Stack alignItems="flex-start" gap="2px">
+              <Typography variant="body" color="#202325">
+                Rất tiếc, tôi không tham gia được
+              </Typography>
+            </Stack>
+          </Box>
+          {join && (
+            <>
               <Stack alignItems="flex-start" gap="2px">
-                <Typography variant="body" color="#202325">
-                  {nhaTrai
-                    ? "Tiệc cưới, 15:00 chiều 31/12/2023"
-                    : "Tiệc cưới, 16:00 chiều 31/12/2023"}
+                <Typography variant="label" color="#202325">
+                  Ngày tham dự:
                 </Typography>
               </Stack>
-            </Box>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                gap: "8px",
-              }}
-            >
-              <IconImg
-                sx={{ cursor: "pointer" }}
-                src={
-                  day.includes("01/01/2024")
-                    ? "/icons/rectangle-checkbox-check.svg"
-                    : "/icons/rectangle-checkbox.svg"
-                }
-                onClick={() =>
-                  setDay((prevDay) =>
-                    prevDay.includes("01/01/2024")
-                      ? prevDay.filter((day) => day !== "01/01/2024")
-                      : [...prevDay, "01/01/2024"]
-                  )
-                }
-              />
-              <Stack alignItems="flex-start" gap="2px">
-                <Typography variant="body" color="#202325">
-                  {nhaTrai
-                    ? "Lễ thành hôn, 09:00 sáng 01/01/2024"
-                    : "Lễ vu quy, 07:00 sáng 01/01/2024"}
-                </Typography>
-              </Stack>
-            </Box>
-          </>
-        )}
-        {error && (
-          <Typography variant="label" sx={{ color: theme.palette.error.main }}>
-            Chưa chọn ngày tham gia
-          </Typography>
-        )}
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  gap: "8px",
+                }}
+              >
+                <IconImg
+                  sx={{ cursor: "pointer" }}
+                  src={
+                    day.includes("31/12/2023")
+                      ? "/icons/rectangle-checkbox-check.svg"
+                      : "/icons/rectangle-checkbox.svg"
+                  }
+                  onClick={() =>
+                    setDay((prevDay) =>
+                      prevDay.includes("31/12/2023")
+                        ? prevDay.filter((day) => day !== "31/12/2023")
+                        : [...prevDay, "31/12/2023"]
+                    )
+                  }
+                />
+                <Stack alignItems="flex-start" gap="2px">
+                  <Typography variant="body" color="#202325">
+                    {nhaTrai
+                      ? "Tiệc cưới, 15:00 chiều 31/12/2023"
+                      : "Tiệc cưới, 16:00 chiều 31/12/2023"}
+                  </Typography>
+                </Stack>
+              </Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  gap: "8px",
+                }}
+              >
+                <IconImg
+                  sx={{ cursor: "pointer" }}
+                  src={
+                    day.includes("01/01/2024")
+                      ? "/icons/rectangle-checkbox-check.svg"
+                      : "/icons/rectangle-checkbox.svg"
+                  }
+                  onClick={() =>
+                    setDay((prevDay) =>
+                      prevDay.includes("01/01/2024")
+                        ? prevDay.filter((day) => day !== "01/01/2024")
+                        : [...prevDay, "01/01/2024"]
+                    )
+                  }
+                />
+                <Stack alignItems="flex-start" gap="2px">
+                  <Typography variant="body" color="#202325">
+                    {nhaTrai
+                      ? "Lễ thành hôn, 09:00 sáng 01/01/2024"
+                      : "Lễ vu quy, 07:00 sáng 01/01/2024"}
+                  </Typography>
+                </Stack>
+              </Box>
+            </>
+          )}
+          {error && (
+            <Typography variant="label" sx={{ color: theme.palette.error.main }}>
+              Chưa chọn ngày tham gia
+            </Typography>
+          )}
+        </Stack>
+        <Button text="Xác nhận" type="filled" onClick={handleSubmit} />
       </Stack>
-      <Button text="Xác nhận" type="filled" onClick={handleSubmit} />
-    </Stack>
+    )
   );
 }
 
