@@ -9,7 +9,7 @@ function VerticalDivider({ disableVertical }) {
   const { isPhone } = useMedia();
 
   return (
-    <Stack sx={{ height: 254, alignItems: "center", gap: "-2px" }}>
+    <Stack sx={{ height: isPhone ? 84 : 140, alignItems: "center", gap: "-2px" }}>
       <Image
         src="/icons/ellipse.svg"
         alt="ellipse"
@@ -19,7 +19,7 @@ function VerticalDivider({ disableVertical }) {
       <Box
         sx={{
           width: isPhone ? "1px" : "4px",
-          height: isPhone ? "168px" : "240px",
+          height: isPhone ? 78 : 126,
           flexShrink: 0,
           background: theme.palette.neutral.midLight,
           visibility: disableVertical ? "hidden" : "visible",
@@ -116,7 +116,7 @@ export function TimelineSession() {
   const isHomeBoy = nha === "trai"
   return (
     <Stack
-      sx={{ padding: isPhone ? "16px" : "64px 0 0"}}
+      sx={{ padding: isPhone ? "16px 0 24px" : "64px 0 24px"}}
       alignItems="center"
       gap={isPhone ? "8px" : "32px"}
       alignSelf="stretch"
@@ -137,7 +137,7 @@ export function TimelineSession() {
       </Typography>
       <Stack alignItems="center">
         <Box
-          height={isPhone ? 124 : 204}
+          height={isPhone ? 84 : 140}
           sx={{ display: "flex", alignItems: "flex-start", gap: "8px" }}
         >
           <EventIcon src="/icons/record.svg" justifyContent="flex-end" />
@@ -186,7 +186,7 @@ export function TimelineSession() {
           </EventContentWrapper>
         </Box>
         <Box
-          height={isPhone ? 124 : 204}
+          height={isPhone ? 84 : 140}
           sx={{ display: "flex", alignItems: "flex-start", gap: "8px" }}
         >
           <EventContentWrapper alignItems="flex-end">
@@ -234,7 +234,7 @@ export function TimelineSession() {
           <EventIcon src="/icons/rings.svg" justifyContent="flex-start" />
         </Box>
         <Box
-          height={isPhone ? 124 : 204}
+          height={isPhone ? 84 : 140}
           sx={{ display: "flex", alignItems: "flex-start", gap: "8px" }}
         >
           <EventIcon src="/icons/champagne.svg" justifyContent="flex-end" />
@@ -282,7 +282,7 @@ export function TimelineSession() {
           </EventContentWrapper>
         </Box>
         <Box
-          height={isPhone ? 174 : 254}
+          height={isPhone ? 84 : 140}
           sx={{ display: "flex", alignItems: "flex-start", gap: "8px" }}
         >
           <EventContentWrapper alignItems="flex-end">
