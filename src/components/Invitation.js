@@ -1,9 +1,10 @@
+import Image from "next/image";
+import { useState } from "react";
 import { Box, Stack, Typography, styled, useTheme } from "@mui/material";
+
 import { Button } from "./Buttons";
-import IconImg from "./IconImg";
 import { ThreeDCarousel } from "./3DCarousel";
 import { useMedia } from "@/pages/[id]";
-import { useState } from "react";
 import { nha } from "@/configs/app";
 import { SlideCarousel } from "./SlideCarousel";
 
@@ -47,13 +48,18 @@ export function InvitationSession({
             }}
           >
             <Box width={24} height={24}></Box>
-            <IconImg src="/icons/vnd.svg" width={24} height={24} />
-            <IconImg
+            <Image
+              src="/icons/vnd.svg"
+              width={24}
+              height={24}
+              alt="vnd phone"
+            />
+            <Image
               src={openNav ? "/icons/close.svg" : "/icons/nav.svg"}
               width={24}
               height={24}
               onClick={() => setOpenNav((prev) => !prev)}
-              sx={{ cursor: "pointer" }}
+              alt="nav icon"
             />
           </Box>
           <NavPhoneStack opennav={openNav ? 1 : 0}>
@@ -75,9 +81,11 @@ export function InvitationSession({
         >
           <Button type="text" text="Sự kiện chính" onClick={clickEvent} />
           <Button type="text" text="Cặp đôi" onClick={clickCouple} />
-          <IconImg
+          <Image
             src="/icons/vnd.svg"
-            sx={{ width: "72px", hieght: "72px" }}
+            width={72}
+            height={72}
+            alt="vnd desktop"
           />
           <Button type="text" text="Album cưới" onClick={clickAlbum} />
           <Button type="text" text="Mừng cưới" onClick={clickMungCuoi} />
@@ -86,12 +94,16 @@ export function InvitationSession({
       <Stack
         gap="8px"
         alignItems="center"
-        style={isPhone? {} : {
-          backgroundImage: "url(/images/bg-slide.png)",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          backgroundPosition: "-0px -36px"
-        }}
+        style={
+          isPhone
+            ? {}
+            : {
+                backgroundImage: "url(/images/bg-slide.png)",
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "cover",
+                backgroundPosition: "-0px -36px",
+              }
+        }
       >
         <Box
           sx={{
@@ -102,10 +114,11 @@ export function InvitationSession({
           }}
         >
           {isPhone ? (
-            <IconImg
+            <Image
               src="/icons/invitation-deco-left-phone.svg"
               width={88}
               height={84}
+              alt="deco left phone"
             />
           ) : (
             <Box></Box>
@@ -122,10 +135,11 @@ export function InvitationSession({
             </Typography>
           </Stack>
           {isPhone ? (
-            <IconImg
+            <Image
               src="/icons/invitation-deco-right-phone.svg"
               width={88}
               height={84}
+              alt="deco right phone"
             />
           ) : (
             <Box></Box>

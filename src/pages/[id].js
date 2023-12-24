@@ -1,7 +1,8 @@
-import IconImg from "@/components/IconImg";
-import { appHostname } from "@/configs/app";
-import { Stack, useMediaQuery, useTheme } from "@mui/material";
 import { createContext, useContext, useRef } from "react";
+import Image from "next/image";
+import { Box, Stack, useMediaQuery, useTheme } from "@mui/material";
+
+import { appHostname } from "@/configs/app";
 import { CountDown } from "@/components/CountDown";
 import { EventSession } from "@/components/Event";
 import { CoupleSession } from "@/components/Couple";
@@ -10,6 +11,8 @@ import { AlbumSession } from "@/components/Album";
 import { MungCuoiSession } from "@/components/MungCuoi";
 import { InvitationSession } from "@/components/Invitation";
 import { Form } from "@/components/Form";
+import endSessionPhone from "@/../public/images/end-session-phone.png";
+import endSession from "@/../public/images/end-session.png";
 
 const UserContext = createContext();
 
@@ -39,8 +42,8 @@ export default function Wedding({ user }) {
   const isPhone = useMediaQuery(theme.breakpoints.down("sm"));
 
   const handleScrollToView = (dom) => {
-    dom.scrollIntoView({ behavior: 'smooth' });
-  }
+    dom.scrollIntoView({ behavior: "smooth" });
+  };
 
   const eventRef = useRef();
   const coupleRef = useRef();
@@ -51,8 +54,6 @@ export default function Wedding({ user }) {
     <UserContext.Provider value={{ user }}>
       <MediaContext.Provider value={{ isPhone }}>
         <Stack>
-          {/* <Box sx={{ background: `url("/images/left-decoration.png")`, position: 'absolute', top: '21px', width: '20vw', height: '55vh' }}></Box>
-          <Box sx={{ background: `url("/images/right-decoration.png")`, position: 'absolute', right: "0px", top: '40px', width: '20vw', height: '55vh' }}></Box> */}
           <Form />
           <InvitationSession
             username={username}
@@ -67,7 +68,19 @@ export default function Wedding({ user }) {
           <TimelineSession />
           <AlbumSession ref={albumRef} />
           <MungCuoiSession ref={mungCuoiRef} />
-          <IconImg width='100%' src={isPhone ? "/images/end-session-phone.png" : "/images/end-session.png"} />
+          <Box position="relative" width="100%" height={isPhone ? 780 : 500}>
+            <Image
+              src={isPhone ? endSessionPhone : endSession}
+              alt="end session image"
+              placeholder="blur"
+              quality={100}
+              fill
+              sizes="100vw"
+              style={{
+                objectFit: "cover",
+              }}
+            />
+          </Box>
         </Stack>
       </MediaContext.Provider>
     </UserContext.Provider>

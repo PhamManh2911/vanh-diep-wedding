@@ -1,6 +1,6 @@
-import { Box, Stack, Typography, useMediaQuery, useTheme } from "@mui/material";
-import IconImg from "./IconImg";
+import { Box, Stack, Typography, useTheme } from "@mui/material";
 import Image from "next/image";
+
 import { useMedia } from "@/pages/[id]";
 import { nha } from "@/configs/app";
 
@@ -9,7 +9,9 @@ function VerticalDivider({ disableVertical }) {
   const { isPhone } = useMedia();
 
   return (
-    <Stack sx={{ height: isPhone ? 84 : 140, alignItems: "center", gap: "-2px" }}>
+    <Stack
+      sx={{ height: isPhone ? 84 : 140, alignItems: "center", gap: "-2px" }}
+    >
       <Image
         src="/icons/ellipse.svg"
         alt="ellipse"
@@ -33,18 +35,20 @@ function EventIcon({ src, justifyContent }) {
   const { isPhone } = useMedia();
 
   return (
-    <IconImg
-      src={src}
-      sx={{
-        display: "flex",
-        width: isPhone ? 150 : 420,
-        padding: isPhone ? "4px" : "8px",
-        justifyContent,
-        alignItems: "center",
-        gap: "8px",
-      }}
-      imageSx={{ width: isPhone ? 60 : 120, height: isPhone ? 60 : 120 }}
-    />
+    <Stack
+      width={isPhone ? 150 : 420}
+      justifyContent="center"
+      alignItems="center"
+      gap="8px"
+      padding={isPhone ? "4px" : "8px"}
+    >
+      <Image
+        src={src}
+        width={isPhone ? 60 : 120}
+        height={isPhone ? 60 : 120}
+        alt="image"
+      />
+    </Stack>
   );
 }
 
@@ -113,10 +117,10 @@ function EventDecs({ children, justifyContent, textAlign }) {
 export function TimelineSession() {
   const theme = useTheme();
   const { isPhone } = useMedia();
-  const isHomeBoy = nha === "trai"
+  const isHomeBoy = nha === "trai";
   return (
     <Stack
-      sx={{ padding: isPhone ? "16px 0 24px" : "64px 0 24px"}}
+      sx={{ padding: isPhone ? "16px 0 24px" : "64px 0 24px" }}
       alignItems="center"
       gap={isPhone ? "8px" : "32px"}
       alignSelf="stretch"
@@ -157,7 +161,7 @@ export function TimelineSession() {
                 textAlign="left"
                 color={theme.palette.neutral.dark}
               >
-                {isHomeBoy? "09:00 SÁNG" : "07:00 SÁNG"}
+                {isHomeBoy ? "09:00 SÁNG" : "07:00 SÁNG"}
               </Typography>
               {isPhone ? null : (
                 <Typography
@@ -173,8 +177,7 @@ export function TimelineSession() {
                 textAlign="left"
                 color={theme.palette.neutral.dark}
               >
-                {isHomeBoy? "ĐÓN KHÁCH" : "LÀM LỄ"}
-                
+                {isHomeBoy ? "ĐÓN KHÁCH" : "LÀM LỄ"}
               </Typography>
             </Box>
             <EventDecs justifyContent="flex-start" textAlign="left">
@@ -204,7 +207,7 @@ export function TimelineSession() {
                 textAlign="right"
                 color={theme.palette.neutral.dark}
               >
-                {isHomeBoy ? "09:30 SÁNG": "07:30 SÁNG"}
+                {isHomeBoy ? "09:30 SÁNG" : "07:30 SÁNG"}
               </Typography>
               {isPhone ? null : (
                 <Typography
@@ -316,7 +319,7 @@ export function TimelineSession() {
                 textAlign="right"
                 color={theme.palette.neutral.dark}
               >
-                { isHomeBoy ? "GIAO LƯU VĂN NGHỆ" : "NHẬP TIỆC"}
+                {isHomeBoy ? "GIAO LƯU VĂN NGHỆ" : "NHẬP TIỆC"}
               </Typography>
             </Box>
             <EventDecs justifyContent="flex-end" textAlign="left">

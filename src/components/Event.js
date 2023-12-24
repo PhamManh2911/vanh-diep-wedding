@@ -1,6 +1,7 @@
-import { Box, Stack, Typography, useTheme } from "@mui/material";
-import IconImg from "./IconImg";
 import { forwardRef } from "react";
+import Image from "next/image";
+import { Box, Stack, Typography, useTheme } from "@mui/material";
+
 import { Button } from "./Buttons";
 import { useMedia } from "@/pages/[id]";
 import { nha } from "@/configs/app";
@@ -63,7 +64,12 @@ export const EventSession = forwardRef(function EventSession(_, ref) {
           </Typography>
           <Stack justifyContent="center" alignItems="flex-start" gap="8px">
             <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <IconImg src="/icons/clock.svg" width={24} height={24} />
+              <Image
+                src="/icons/clock.svg"
+                width={24}
+                height={24}
+                alt="clock"
+              />
               <Typography
                 variant="body"
                 color="#000"
@@ -79,7 +85,12 @@ export const EventSession = forwardRef(function EventSession(_, ref) {
                 gap: "8px",
               }}
             >
-              <IconImg src="/icons/calendar.svg" width={24} height={24} />
+              <Image
+                src="/icons/calendar.svg"
+                width={24}
+                height={24}
+                alt="calendar"
+              />
               <Typography variant="body" color="#000" textAlign={"left"}>
                 Chủ Nhật, 31/12/2023
                 <br />
@@ -93,7 +104,12 @@ export const EventSession = forwardRef(function EventSession(_, ref) {
                 gap: "8px",
               }}
             >
-              <IconImg src="/icons/location.svg" width={24} height={24} />
+              <Image
+                src="/icons/location.svg"
+                width={24}
+                height={24}
+                alt="location"
+              />
               <Typography variant="body" color="#000" textAlign={"left"}>
                 {nhaTrai
                   ? "HỘI TRƯỜNG THPT LƯƠNG TÀI, LƯƠNG TÀI, BẮC NINH"
@@ -116,18 +132,20 @@ export const EventSession = forwardRef(function EventSession(_, ref) {
           }}
         >
           {isPhone ? (
-            <IconImg
+            <Image
               src="/icons/event-deco-phone.svg"
               width={289}
               height={187}
-              sx={{ top: "70px", position: "relative" }}
+              alt="event deco phone"
+              style={{ top: "70px", position: "relative" }}
             />
           ) : (
-            <IconImg
+            <Image
               src="/icons/event-deco.svg"
               width={428}
               height={270}
-              sx={{ top: "100px", position: "relative" }}
+              alt="event deco"
+              style={{ top: "100px", position: "relative" }}
             />
           )}
         </Stack>
@@ -148,7 +166,12 @@ export const EventSession = forwardRef(function EventSession(_, ref) {
           </Typography>
           <Stack justifyContent="center" alignItems="flex-start" gap="8px">
             <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <IconImg src="/icons/clock.svg" width={24} height={24} />
+              <Image
+                src="/icons/clock.svg"
+                width={24}
+                height={24}
+                alt="clock"
+              />
               <Typography
                 variant="body"
                 color="#000"
@@ -164,7 +187,12 @@ export const EventSession = forwardRef(function EventSession(_, ref) {
                 gap: "8px",
               }}
             >
-              <IconImg src="/icons/calendar.svg" width={24} height={24} />
+              <Image
+                src="/icons/calendar.svg"
+                width={24}
+                height={24}
+                alt="calendar"
+              />
               <Typography variant="body" color="#000" textAlign={"left"}>
                 Thứ Hai, 01/01/2024
                 <br />
@@ -178,7 +206,12 @@ export const EventSession = forwardRef(function EventSession(_, ref) {
                 gap: "8px",
               }}
             >
-              <IconImg src="/icons/location.svg" width={24} height={24} />
+              <Image
+                src="/icons/location.svg"
+                width={24}
+                height={24}
+                alt="location"
+              />
               <Typography variant="body" color="#000" textAlign={"left"}>
                 {nhaTrai
                   ? "HỘI TRƯỜNG THPT LƯƠNG TÀI, LƯƠNG TÀI, BẮC NINH"

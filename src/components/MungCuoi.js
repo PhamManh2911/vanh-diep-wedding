@@ -1,7 +1,7 @@
 import { forwardRef, useState } from "react";
+import Image from "next/image";
 import { Box, Dialog, Stack, Typography, useTheme } from "@mui/material";
 
-import IconImg from "./IconImg";
 import { nha } from "@/configs/app";
 import { Button } from "./Buttons";
 import { useMedia } from "@/pages/[id]";
@@ -46,9 +46,11 @@ export const MungCuoiSession = forwardRef(function MungCuoiSession({}, ref) {
             alignItems: "center",
           }}
         >
-          <IconImg
-            sx={{ width: isPhone ? 24 : 80, height: isPhone ? 24 : 80 }}
+          <Image
             src="/images/hom-cuoi-flower-left.png"
+            width={isPhone ? 24 : 80}
+            height={isPhone ? 24 : 80}
+            alt="hom cuoi deco left"
           />
           <Typography
             variant="headline1"
@@ -56,9 +58,11 @@ export const MungCuoiSession = forwardRef(function MungCuoiSession({}, ref) {
           >
             HÒM MỪNG CƯỚI
           </Typography>
-          <IconImg
-            sx={{ width: isPhone ? 24 : 80, height: isPhone ? 24 : 80 }}
+          <Image
             src="/images/hom-cuoi-flower-right.png"
+            width={isPhone ? 24 : 80}
+            height={isPhone ? 24 : 80}
+            alt="hom cuoi deco right"
           />
         </Box>
         <Typography variant="body" color={theme.palette.primary.dark}>
@@ -75,18 +79,25 @@ export const MungCuoiSession = forwardRef(function MungCuoiSession({}, ref) {
         }}
       >
         {isPhone ? (
-          <IconImg
-            sx={{ width: 63, height: 140, alignItems: "flex-start" }}
+          <Image
+            width={63}
+            height={140}
+            style={{ alignItems: "flex-start" }}
             src="/icons/bank-deco-left-phone.svg"
-            imageSx={{ width: 63, height: 104 }}
+            alt="bank deco left phone"
           />
         ) : (
-          <IconImg
-            sx={{ width: 356, height: 216 }}
+          <Image
+            width={356}
+            height={216}
             src="/icons/bank-deco-left.svg"
+            alt="bank deco left phone"
           />
         )}
-        <Stack gap={isPhone ? 0 : "32px"}>
+        <Stack
+          gap={isPhone ? 0 : "32px"}
+          paddingBottom={isPhone ? "8px" : "32px"}
+        >
           <Box
             sx={{
               display: "flex",
@@ -96,26 +107,33 @@ export const MungCuoiSession = forwardRef(function MungCuoiSession({}, ref) {
               flexDirection: isPhone ? "column" : "row",
             }}
           >
-            <IconImg
+            <Image
               src={nhaTrai ? "/images/qr-groom.png" : "/images/qr-bride.png"}
-              sx={{
-                width: 226,
-                height: 224,
-                borderRadius: "8px",
-                border: `12px solid ${theme.palette.primary.main}`,
-              }}
+              width={226}
+              height={224}
+              alt="qr"
             />
             <Stack
               padding={isPhone ? "16px 32px" : "32px 0"}
               gap={isPhone ? "16px" : "32px"}
             >
-              <IconImg
-                src={
-                  nhaTrai ? "/images/bank-groom.png" : "/images/bank-bride.png"
-                }
-                sx={{ width: isPhone ? 173 : 106, height: 24 }}
-                imageSx={{ width: 106, height: 24 }}
-              />
+              <Stack
+                justifyContent="center"
+                alignItems="center"
+                width={isPhone ? 173 : 106}
+                height={24}
+              >
+                <Image
+                  width={106}
+                  height={24}
+                  alt="bank"
+                  src={
+                    nhaTrai
+                      ? "/images/bank-groom.png"
+                      : "/images/bank-bride.png"
+                  }
+                />
+              </Stack>
               <Stack gap={isPhone ? "8px" : "16px"} alignItems="flex-start">
                 <Typography variant="title" color="black">
                   {nhaTrai ? (
@@ -174,17 +192,24 @@ export const MungCuoiSession = forwardRef(function MungCuoiSession({}, ref) {
                       padding: "16px",
                     }}
                   >
-                    <IconImg
-                      src="/icons/close.svg"
+                    <Stack
+                      justifyContent="center"
+                      alignItems="center"
+                      width={32}
+                      height={32}
                       sx={{
-                        width: 32,
-                        height: 32,
                         backgroundColor: "#F5F5F5",
                         borderRadius: "50%",
                         cursor: "pointer",
                       }}
-                      imageSx={{ width: 24, height: 24 }}
-                    />
+                    >
+                      <Image
+                        src="/icons/close.svg"
+                        width={24}
+                        height={24}
+                        alt="close dialog"
+                      />
+                    </Stack>
                   </Box>
                   <Stack
                     padding="0 32px 32px"
@@ -192,29 +217,25 @@ export const MungCuoiSession = forwardRef(function MungCuoiSession({}, ref) {
                     justifyContent="center"
                     alignItems="center"
                   >
-                    {isPhone ? (
-                      <IconImg
+                    <Stack
+                      justifyContent="center"
+                      alignItems="center"
+                      width={isPhone ? 270 : 400}
+                      height={isPhone ? 270 : 400}
+                      sx={{
+                        borderRadius: "24px",
+                        border: `${isPhone ? 8 : 12}px solid ${
+                          theme.palette.primary.main
+                        }`,
+                      }}
+                    >
+                      <Image
                         src="/images/crypto-groom.png"
-                        sx={{
-                          width: 270,
-                          height: 270,
-                          borderRadius: "24px",
-                          border: `8px solid ${theme.palette.primary.main}`,
-                        }}
-                        imageSx={{ width: 240, height: 240 }}
+                        width={isPhone ? 240 : 360}
+                        height={isPhone ? 240 : 360}
+                        alt="crypto"
                       />
-                    ) : (
-                      <IconImg
-                        src="/images/crypto-groom.png"
-                        sx={{
-                          width: 400,
-                          height: 400,
-                          borderRadius: "24px",
-                          border: `12px solid ${theme.palette.primary.main}`,
-                        }}
-                        imageSx={{ width: 360, height: 360 }}
-                      />
-                    )}
+                    </Stack>
                     <Stack
                       gap="16px"
                       justifyContent="center"
@@ -253,15 +274,19 @@ export const MungCuoiSession = forwardRef(function MungCuoiSession({}, ref) {
           )}
         </Stack>
         {isPhone ? (
-          <IconImg
-            sx={{ width: 63, height: 140, alignItems: "flex-start" }}
+          <Image
+            width={63}
+            height={140}
+            style={{ alignItems: "flex-start" }}
             src="/icons/bank-deco-right-phone.svg"
-            imageSx={{ width: 63, height: 104 }}
+            alt="bank deco right phone"
           />
         ) : (
-          <IconImg
-            sx={{ width: 356, height: 216 }}
+          <Image
+            width={356}
+            height={216}
             src="/icons/bank-deco-right.svg"
+            alt="bank deco right phone"
           />
         )}
       </Box>

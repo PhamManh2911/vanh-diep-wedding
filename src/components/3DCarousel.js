@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import IconImg from "./IconImg";
+import Image from "next/image";
 import { Box, Stack, Typography, styled, useTheme } from "@mui/material";
+
 import { nha } from "@/configs/app";
 
 const zIndex = 1000;
@@ -60,11 +61,6 @@ const recenterIndex = (pos) => {
   if (pos === -3) return 2;
   return pos;
 };
-
-const IconImage = styled("img")({
-  height: "auto",
-  width: "100%",
-});
 
 export function ThreeDCarousel() {
   const theme = useTheme();
@@ -147,7 +143,13 @@ export function ThreeDCarousel() {
                 ></Box>
               </>
             )}
-            <IconImage src={image} sx={genCommonStyle(theme)} />
+            <Image
+              src={image}
+              style={genCommonStyle(theme)}
+              width={800}
+              height={464}
+              alt="carousel"
+            />
           </Box>
         ))}
       </Box>
@@ -169,7 +171,12 @@ export function ThreeDCarousel() {
           }}
           onClick={handlePrev}
         >
-          <IconImg src="/icons/chevron-left.svg" width="24px" height="24px" />
+          <Image
+            src="/icons/chevron-left.svg"
+            width={24}
+            height={24}
+            alt="chevron left"
+          />
         </Box>
         <Box
           sx={{
@@ -181,18 +188,16 @@ export function ThreeDCarousel() {
           }}
         >
           {[0, 1, 2, 3, 4].map((value) => (
-            <IconImg
+            <Image
               key={value}
               onClick={() => setCurrent(value)}
+              style={{ cursor: "pointer" }}
               src={
                 value === current ? "/icons/dot-active.svg" : "/icons/dot.svg"
               }
-              style={{
-                ...(value === current
-                  ? { width: 16, height: 16 }
-                  : { width: 12, height: 12 }),
-                cursor: "pointer",
-              }}
+              width={value === current ? 16 : 12}
+              height={value === current ? 16 : 12}
+              alt="dot"
             />
           ))}
         </Box>
@@ -205,7 +210,12 @@ export function ThreeDCarousel() {
           }}
           onClick={handleNext}
         >
-          <IconImg src="/icons/chevron-right.svg" width="24px" height="24px" />
+          <Image
+            src="/icons/chevron-right.svg"
+            width={24}
+            height={24}
+            alt="chevron right"
+          />
         </Box>
       </Box>
     </Stack>

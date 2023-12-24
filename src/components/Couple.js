@@ -1,7 +1,8 @@
+import { forwardRef, useState } from "react";
+import { Box, Stack, Typography, useTheme } from "@mui/material";
+
 import { nha } from "@/configs/app";
 import { useMedia } from "@/pages/[id]";
-import { Box, Stack, Typography, useTheme, Button } from "@mui/material";
-import { forwardRef, useState } from "react";
 import NextIcon from "./Icons/NextIcon";
 import PrevIcon from "./Icons/PrevIcon";
 
