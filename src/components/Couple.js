@@ -1,4 +1,5 @@
 import { forwardRef, useState } from "react";
+import Image from "next/image";
 import { Box, Stack, Typography, useTheme } from "@mui/material";
 
 import { nha } from "@/configs/app";
@@ -65,11 +66,19 @@ export const CoupleSession = forwardRef(function Couple(_, ref) {
       height={632}
       alignSelf="stretch"
       sx={{
-        background: `linear-gradient(180deg, rgba(247, 250, 255, 0.00) 0%, rgba(247, 250, 255, 0.00) 10.66%, rgba(247, 250, 255, 0.00) 35.92%), linear-gradient(180deg, rgba(247, 250, 255, 0.20) 0%, rgba(247, 250, 255, 0.00) 28.33%), linear-gradient(180deg, rgba(255, 255, 255, 0.20) 8.85%, rgba(247, 250, 255, 0.00) 36.46%), linear-gradient(180deg, rgba(255, 255, 255, 0.20) 4.2%, rgba(247, 250, 255, 0.00) 36.68%), url("/images/couple.jpg") 50% / cover no-repeat`,
         boxShadow: "10px 10px 100px 0px #F7FAFF inset",
         position: "relative",
       }}
     >
+      <Image
+        alt="couple"
+        src="/images/couple.jpeg"
+        // placeholder="blur"
+        quality={100}
+        fill
+        sizes="100vw"
+        style={{ objectFit: "cover" }}
+      />
       <Box
         sx={{
           display: "inline-flex",
@@ -99,6 +108,7 @@ export const CoupleSession = forwardRef(function Couple(_, ref) {
           padding: "30px",
           width: "100%",
           height: "100%",
+          position: "relative",
         }}
       >
         <Box
