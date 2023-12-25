@@ -3,14 +3,12 @@ import {
   CircularProgress,
   InputAdornment,
   OutlinedInput,
-  Skeleton,
   Stack,
   Typography,
-  styled,
   useTheme,
 } from "@mui/material";
 import axios from "axios";
-import { useRef, useState, useEffect, useMemo } from "react";
+import { useState } from "react";
 import Image from "next/image";
 
 import { appHostname, nha } from "@/configs/app";
@@ -20,10 +18,8 @@ import { sansserif } from "../../../public/fonts";
 function InvitationImage({ src, sx = {}, imageSx, ...props }) {
   if (sx && sx.width && !sx.height) sx.height = "auto";
   if (sx && sx.height && !sx.width) sx.width = "auto";
-  const [loaded, setLoaded] = useState(false);
   // const [copied, setCopied] = useState(false);
   // const [downloaded, setDownloaded] = useState(false);
-  const imageRef = useRef();
 
   // const blobData = useMemo(async () => {
   //   const response = await axios(src);
@@ -58,10 +54,6 @@ function InvitationImage({ src, sx = {}, imageSx, ...props }) {
   //   }, 1000);
   // }
 
-  useEffect(() => {
-    if (imageRef.current?.complete) setLoaded(true);
-  }, []);
-
   return (
     <Box
       sx={{
@@ -75,24 +67,17 @@ function InvitationImage({ src, sx = {}, imageSx, ...props }) {
     >
       <Image
         src={src}
-        style={{ display: loaded ? "block" : "none", ...imageSx }}
-        ref={imageRef}
-        onLoad={() => setLoaded(true)}
         alt="invitation image"
+        quality={100}
         fill
+        sizes="100vw"
+        style={{
+          objectFit: "cover",
+          ...imageSx,
+        }}
+        placeholder="blur"
+        blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/ONHPQAJLQNkv3eBgwAAAABJRU5ErkJggg=="
       />
-      {!loaded && (
-        <Skeleton
-          variant="rectangular"
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            ...sx,
-          }}
-          {...props}
-        />
-      )}
     </Box>
   );
 }
