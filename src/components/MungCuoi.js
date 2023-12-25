@@ -16,7 +16,7 @@ export const MungCuoiSession = forwardRef(function MungCuoiSession({}, ref) {
   const [copiedCrypto, setCopiedCrypto] = useState(false);
 
   const bankNumber = nhaTrai ? "690301199" : "0301000373587";
-  const cryptoNumber = "0x83cfd7215e5...c79b";
+  const cryptoNumber = "0x83cfd7215e58a9403f4193662e616659aa20c79b";
 
   const handleCopy = async () => {
     setCopied(true);

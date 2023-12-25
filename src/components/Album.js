@@ -182,21 +182,12 @@ export const AlbumSession = forwardRef(function AlbumSession(_, ref) {
         >
           ALBUM ẢNH CƯỚI
         </Typography>
-        {isPhone ? (
-          <Image
-            src="/icons/album-deco-phone.svg"
-            width={212}
-            height={120}
-            alt="album deco phone"
-          />
-        ) : (
-          <Image
-            src="/icons/album-deco.svg"
-            width={212}
-            height={120}
-            alt="album deco"
-          />
-        )}
+        <Image
+          src={isPhone ? "/icons/album-deco-phone.svg" : "/icons/album-deco.svg"}
+          width={212}
+          height={120}
+          alt="album deco"
+        />
         <Typography
           variant="display"
           color={theme.palette.primary.dark}
