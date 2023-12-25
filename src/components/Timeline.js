@@ -1,8 +1,9 @@
 import { Box, Stack, Typography, useTheme } from "@mui/material";
 import Image from "next/image";
 
-import { useMedia } from "@/pages/[id]";
+import { useMedia } from "@/providers/MediaProvider";
 import { nha } from "@/configs/app";
+import { bellissima } from "../../public/fonts";
 
 function VerticalDivider({ disableVertical }) {
   const theme = useTheme();
@@ -89,7 +90,7 @@ function EventDecs({ children, justifyContent, textAlign }) {
         sx={{
           color: theme.palette.primary.main,
           textAlign,
-          fontFamily: "Bellissima",
+          fontFamily: bellissima.style.fontFamily,
           fontSize: isPhone ? 20 : 32,
           lineHeight: isPhone ? "30px" : "40px",
         }}

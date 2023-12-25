@@ -3,9 +3,10 @@ import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 
 import { nha } from "@/configs/app";
-import { useMedia } from "@/pages/[id]";
+import { useMedia } from "@/providers/MediaProvider";
 import { Stack, Typography, useTheme } from "@mui/material";
 import { Box } from "@mui/system";
+import { sansserif } from "../../public/fonts";
 
 export function CountDown() {
   const theme = useTheme();
@@ -79,7 +80,7 @@ export function CountDown() {
             <Typography
               sx={{
                 color: theme.palette.primary.main,
-                fontFamily: "Sans Serif",
+                fontFamily: sansserif.style.fontFamily,
                 fontSize: "24px",
                 fontWeight: "700",
                 lineHeight: "32px",
@@ -90,7 +91,7 @@ export function CountDown() {
             <Typography
               sx={{
                 color: theme.palette.primary.main,
-                fontFamily: "Sans Serif",
+                fontFamily: sansserif.style.fontFamily,
                 fontSize: "12px",
                 fontWeight: "600",
                 lineHeight: "28px",
@@ -102,7 +103,7 @@ export function CountDown() {
           <Typography
             sx={{
               color: theme.palette.primary.main,
-              fontFamily: "Sans Serif",
+              fontFamily: sansserif.style.fontFamily,
               fontSize: "24px",
               fontWeight: "700",
               lineHeight: "32px",
@@ -122,7 +123,7 @@ export function CountDown() {
             <Typography
               sx={{
                 color: theme.palette.primary.main,
-                fontFamily: "Sans Serif",
+                fontFamily: sansserif.style.fontFamily,
                 fontSize: "24px",
                 fontWeight: "700",
                 lineHeight: "32px",
@@ -133,7 +134,7 @@ export function CountDown() {
             <Typography
               sx={{
                 color: theme.palette.primary.main,
-                fontFamily: "Sans Serif",
+                fontFamily: sansserif.style.fontFamily,
                 fontSize: "12px",
                 fontWeight: "600",
                 lineHeight: "28px",
@@ -145,7 +146,7 @@ export function CountDown() {
           <Typography
             sx={{
               color: theme.palette.primary.main,
-              fontFamily: "Sans Serif",
+              fontFamily: sansserif.style.fontFamily,
               fontSize: "24px",
               fontWeight: "700",
               lineHeight: "32px",
@@ -165,7 +166,7 @@ export function CountDown() {
             <Typography
               sx={{
                 color: theme.palette.primary.main,
-                fontFamily: "Sans Serif",
+                fontFamily: sansserif.style.fontFamily,
                 fontSize: "24px",
                 fontWeight: "700",
                 lineHeight: "32px",
@@ -176,7 +177,7 @@ export function CountDown() {
             <Typography
               sx={{
                 color: theme.palette.primary.main,
-                fontFamily: "Sans Serif",
+                fontFamily: sansserif.style.fontFamily,
                 fontSize: "12px",
                 fontWeight: "600",
                 lineHeight: "28px",
@@ -188,7 +189,7 @@ export function CountDown() {
           <Typography
             sx={{
               color: theme.palette.primary.main,
-              fontFamily: "Sans Serif",
+              fontFamily: sansserif.style.fontFamily,
               fontSize: "24px",
               fontWeight: "700",
               lineHeight: "32px",
@@ -208,7 +209,7 @@ export function CountDown() {
             <Typography
               sx={{
                 color: theme.palette.primary.main,
-                fontFamily: "Sans Serif",
+                fontFamily: sansserif.style.fontFamily,
                 fontSize: "24px",
                 fontWeight: "700",
                 lineHeight: "32px",
@@ -219,7 +220,7 @@ export function CountDown() {
             <Typography
               sx={{
                 color: theme.palette.primary.main,
-                fontFamily: "Sans Serif",
+                fontFamily: sansserif.style.fontFamily,
                 fontSize: "12px",
                 fontWeight: "600",
                 lineHeight: "28px",

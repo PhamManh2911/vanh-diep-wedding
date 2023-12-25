@@ -4,7 +4,7 @@ import { Box, Stack, Typography, styled, useTheme } from "@mui/material";
 
 import { Button } from "./Buttons";
 import { ThreeDCarousel } from "./3DCarousel";
-import { useMedia } from "@/pages/[id]";
+import { useMedia } from "@/providers/MediaProvider";
 import { nha } from "@/configs/app";
 import { SlideCarousel } from "./SlideCarousel";
 
@@ -128,7 +128,7 @@ export function InvitationSession({
               TRÂN TRỌNG KÍNH MỜI
             </Typography>
             <Typography color={theme.palette.primary.main} variant="display">
-              {username || "TruongDX"}
+              {username ?? "Bạn"}
             </Typography>
             <Typography color={theme.palette.primary.dark} variant="headline2">
               {nhaTrai ? "TỚI DỰ LỄ THÀNH HÔN" : "TỚI DỰ LỄ VU QUY"}

@@ -3,9 +3,10 @@ import Image from "next/image";
 import { Box, Stack, Typography, useTheme } from "@mui/material";
 
 import { nha } from "@/configs/app";
-import { useMedia } from "@/pages/[id]";
+import { useMedia } from "@/providers/MediaProvider";
 import NextIcon from "./Icons/NextIcon";
 import PrevIcon from "./Icons/PrevIcon";
+import { bellissima } from "../../public/fonts";
 
 export const CoupleSession = forwardRef(function Couple(_, ref) {
   const theme = useTheme();
@@ -196,7 +197,7 @@ export const CoupleSession = forwardRef(function Couple(_, ref) {
                 sx={{
                   color: theme.palette.neutral.dark,
                   textAlign: "center",
-                  fontFamily: "Bellissima",
+                  fontFamily: bellissima.style.fontFamily,
                   fontSize: "24px",
                   fontWeight: "400",
                   lineHeight: "32px",
@@ -306,7 +307,7 @@ export const CoupleSession = forwardRef(function Couple(_, ref) {
                 sx={{
                   color: theme.palette.neutral.dark,
                   textAlign: "center",
-                  fontFamily: "Bellissima",
+                  fontFamily: bellissima.style.fontFamily,
                   fontSize: "24px",
                   fontWeight: "400",
                   lineHeight: "32px",

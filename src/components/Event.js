@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Box, Stack, Typography, useTheme } from "@mui/material";
 
 import { Button } from "./Buttons";
-import { useMedia } from "@/pages/[id]";
+import { useMedia } from "@/providers/MediaProvider";
 import { nha } from "@/configs/app";
 
 export const EventSession = forwardRef(function EventSession(_, ref) {

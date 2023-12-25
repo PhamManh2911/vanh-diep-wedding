@@ -15,12 +15,7 @@ import Image from "next/image";
 
 import { appHostname, nha } from "@/configs/app";
 import { Button } from "@/components/Buttons";
-
-const IconImage = styled("img")({
-  display: "flex",
-  height: "inherit",
-  width: "inherit",
-});
+import { sansserif } from "../../../public/fonts";
 
 function InvitationImage({ src, sx = {}, imageSx, ...props }) {
   if (sx && sx.width && !sx.height) sx.height = "auto";
@@ -30,10 +25,10 @@ function InvitationImage({ src, sx = {}, imageSx, ...props }) {
   // const [downloaded, setDownloaded] = useState(false);
   const imageRef = useRef();
 
-  const blobData = useMemo(async () => {
-    const response = await axios(src);
-    return await response.blob();
-  }, [src]);
+  // const blobData = useMemo(async () => {
+  //   const response = await axios(src);
+  //   return await response.blob();
+  // }, [src]);
 
   // const handleDownloadImage = () => {
   //   setDownloaded(true);
@@ -78,10 +73,6 @@ function InvitationImage({ src, sx = {}, imageSx, ...props }) {
       }}
       {...props}
     >
-      {/* <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px', position: 'absolute', top: 24, right: 24 }}>
-        <Button text="Tải xuống" type="outlined" onClick={handleDownloadImage} disable={downloaded} /> 
-        <Button text={copied ? "Copied" : "Copy"} type="filled" onClick={handleCopyImage} disable={copied} />
-      </Box> */}
       <Image
         src={src}
         style={{ display: loaded ? "block" : "none", ...imageSx }}
@@ -238,7 +229,7 @@ export default function AdminPage() {
                 <Typography
                   sx={{
                     color: theme.palette.neutral.dark,
-                    fontFamily: "Sans Serif",
+                    fontFamily: sansserif.style.fontFamily,
                     fontSize: "24px",
                     fontWeight: 400,
                     lineHeight: "24px",

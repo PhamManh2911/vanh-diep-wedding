@@ -4,7 +4,7 @@ import { Box, Dialog, Stack, Typography, useTheme } from "@mui/material";
 
 import { nha } from "@/configs/app";
 import { Button } from "./Buttons";
-import { useMedia } from "@/pages/[id]";
+import { useMedia } from "@/providers/MediaProvider";
 
 export const MungCuoiSession = forwardRef(function MungCuoiSession({}, ref) {
   const theme = useTheme();

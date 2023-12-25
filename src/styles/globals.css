@@ -1,38 +1,3 @@
-@font-face {
-  font-family: "Bellissima";
-  src: url("/fonts/HLT BellissimaScriptPro.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Serif";
-  src: url("/fonts/Playfair_Display_SC/PlayfairDisplaySC-Black.ttf");
-  src: url("/fonts/Playfair_Display_SC/PlayfairDisplaySC-BlackItalic.ttf");
-  src: url("/fonts/Playfair_Display_SC/PlayfairDisplaySC-Bold.ttf");
-  src: url("/fonts/Playfair_Display_SC/PlayfairDisplaySC-BoldItalic.ttf");
-  src: url("/fonts/Playfair_Display_SC/PlayfairDisplaySC-Italic.ttf");
-  src: url("/fonts/Playfair_Display_SC/PlayfairDisplaySC-Regular.ttf");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Sans Serif";
-  src: url("/fonts/Inter/Inter-Black.ttf");
-  src: url("/fonts/Inter/Inter-Bold.ttf");
-  src: url("/fonts/Inter/Inter-ExtraBold.ttf");
-  src: url("/fonts/Inter/Inter-ExtraLight.ttf");
-  src: url("/fonts/Inter/Inter-Light.ttf");
-  src: url("/fonts/Inter/Inter-Medium.ttf");
-  src: url("/fonts/Inter/Inter-Regular.ttf");
-  src: url("/fonts/Inter/Inter-SemiBold.ttf");
-  src: url("/fonts/Inter/Inter-Thin.ttf");
-  src: url("/fonts/Inter/Inter-VariableFont_slnt,wght.ttf");
-  font-weight: normal;
-  font-style: normal;
-}
-
 * {
   box-sizing: border-box;
   padding: 0;
@@ -43,7 +8,7 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-  font-family: "Serif", "Sans Serif";
+  font-family: var(--font-serif), var(--font-sans-serif);
 }
 
 body {

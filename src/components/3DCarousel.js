@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { Box, Stack, Typography, styled, useTheme } from "@mui/material";
+import { Box, Stack, Typography, useTheme } from "@mui/material";
 
 import { nha } from "@/configs/app";
+import { bellissima } from "../../public/fonts";
 
 const zIndex = 1000;
 const opacity = 1;
@@ -102,7 +103,7 @@ export function ThreeDCarousel() {
             color: theme.palette.primary.light,
             textAlign: "center",
             textShadow: "4px 4px 20px rgba(0, 0, 0, 0.25)",
-            fontFamily: "Bellissima",
+            fontFamily: bellissima.style.fontFamily,
             fontSize: 80,
             lineHeight: "64px",
             letterSpacing: "3.2px",

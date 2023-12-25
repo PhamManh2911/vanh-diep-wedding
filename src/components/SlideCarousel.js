@@ -2,6 +2,7 @@ import { Box, Stack, Typography, useTheme } from "@mui/material";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { nha } from "@/configs/app";
+import { bellissima } from "../../public/fonts";
 
 const phoneImages = [
   "/images/image-phone1.png",
@@ -70,7 +71,7 @@ export function SlideCarousel() {
             color: theme.palette.neutral.light,
             textAlign: "center",
             textShadow: "4px 4px 10px rgba(0, 0, 0, 0.25)",
-            fontFamily: "Bellissima",
+            fontFamily: bellissima.style.fontFamily,
             fontSize: "26px",
             fontWeight: "400",
             lineHeight: "64px",

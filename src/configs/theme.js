@@ -1,5 +1,7 @@
 import { createTheme } from "@mui/material";
 
+import { bellissima, sansserif, serif } from "../../public/fonts";
+
 let theme = createTheme({
   palette: {
     primary: {
@@ -36,7 +38,7 @@ let theme = createTheme({
       onPrimary12: "rgba(255, 255, 255, 0.12)",
       primary8: "rgba(53, 131, 232, 0.08)",
       primary12: "rgba(53, 131, 232, 0.12)",
-    }
+    },
   },
 });
 
@@ -45,44 +47,44 @@ theme = createTheme(theme, {
     fontWeight: 400,
     color: theme.palette.neutral.dark,
     display: {
-      textAlign: 'center',
-      fontFamily: "Bellissima",
+      textAlign: "center",
+      fontFamily: bellissima.style.fontFamily,
       fontSize: 57,
       lineHeight: "64px",
-      [theme.breakpoints.down('sm')]: {
+      [theme.breakpoints.down("sm")]: {
         fontSize: 36,
         lineHeight: "44px",
       },
     },
     headline1: {
-      textAlign: 'center',
-      fontFamily: "Serif",
+      textAlign: "center",
+      fontFamily: serif.style.fontFamily,
       fontSize: 32,
       lineHeight: "40px",
       [theme.breakpoints.down("sm")]: {
         fontSize: 16,
-        lineHeight: '24px',
+        lineHeight: "24px",
       },
     },
     headline2: {
-      textAlign: 'center',
-      fontFamily: "Serif",
+      textAlign: "center",
+      fontFamily: serif.style.fontFamily,
       fontSize: 24,
       lineHeight: "32px",
       [theme.breakpoints.down("sm")]: {
         fontSize: 14,
-        lineHeight: '20px',
+        lineHeight: "20px",
       },
     },
     headline3: {
-      textAlign: 'center',
-      fontFamily: "Serif",
+      textAlign: "center",
+      fontFamily: serif.style.fontFamily,
       fontSize: 16,
       lineHeight: "24px",
     },
     title: {
-      textAlign: 'center',
-      fontFamily: "Sans Serif",
+      textAlign: "center",
+      fontFamily: sansserif.style.fontFamily,
       fontSize: 22,
       lineHeight: "28px",
       [theme.breakpoints.down("sm")]: {
@@ -92,8 +94,8 @@ theme = createTheme(theme, {
       },
     },
     label: {
-      textAlign: 'center',
-      fontFamily: "Sans Serif",
+      textAlign: "center",
+      fontFamily: sansserif.style.fontFamily,
       fontSize: 14,
       fontWeight: 700,
       lineHeight: "20px",
@@ -103,15 +105,15 @@ theme = createTheme(theme, {
       },
     },
     body: {
-      textAlign: 'center',
-      fontFamily: "Sans Serif",
+      textAlign: "center",
+      fontFamily: sansserif.style.fontFamily,
       fontSize: 16,
       lineHeight: "24px",
       [theme.breakpoints.down("sm")]: {
         fontSize: 12,
-        lineHeight: '16px',
+        lineHeight: "16px",
       },
-    }
+    },
   },
 });
 

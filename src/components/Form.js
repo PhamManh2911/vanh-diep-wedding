@@ -12,8 +12,9 @@ import {
 import { useSearchParams } from "next/navigation";
 
 import { Button } from "./Buttons";
-import { useMedia, useUser } from "@/pages/[id]";
+import { useUser } from "@/pages/[id]";
 import { nha } from "@/configs/app";
+import { useMedia } from "@/providers/MediaProvider";
 
 function FormHeader({ close }) {
   const theme = useTheme();

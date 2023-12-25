@@ -3,7 +3,7 @@ import { forwardRef, useState } from "react";
 import { Box, Stack, Typography, useTheme } from "@mui/material";
 import Image from "next/image";
 
-import { useMedia } from "@/pages/[id]";
+import { useMedia } from "@/providers/MediaProvider";
 import { Button } from "./Buttons";
 
 const desktopAlbum = [
@@ -183,7 +183,9 @@ export const AlbumSession = forwardRef(function AlbumSession(_, ref) {
           ALBUM ẢNH CƯỚI
         </Typography>
         <Image
-          src={isPhone ? "/icons/album-deco-phone.svg" : "/icons/album-deco.svg"}
+          src={
+            isPhone ? "/icons/album-deco-phone.svg" : "/icons/album-deco.svg"
+          }
           width={212}
           height={120}
           alt="album deco"
