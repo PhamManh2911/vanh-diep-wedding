@@ -14,7 +14,7 @@ export default async function handler(req, res) {
     const { id } = req.query;
     const user = await User.findByPk(id);
 
-    if (!user) res.status(404).send("User id not found!");
+    if (!user) return res.status(404).send("User id not found!");
     const response = await axios.get(`${apiflashApi}`, {
       params: {
         access_key: apiflashAccessKey,

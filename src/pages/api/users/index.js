@@ -10,7 +10,7 @@ export default async function handler(req, res) {
   if (req.method === "POST") {
     const { userName } = req.body;
 
-    if (!userName) res.status(400).send("Missing user name in body!");
+    if (!userName) return res.status(400).send("Missing user name in body!");
     const user = await User.create({ username: userName });
 
     res.status(200).json({ data: { user } });

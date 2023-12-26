@@ -7,7 +7,7 @@ async function handleGet(req, res, recordId) {
   const record = await genTable(nha_trai === "true").find(recordId);
 
   if (record)
-    res.status(200).json({
+    return res.status(200).json({
       data: { record: record.fields },
     });
   res.status(404).send("Record not found!");
@@ -19,7 +19,7 @@ async function handlePut(req, res, recordId) {
   const record = await genTable(nha_trai === "true").update(recordId, payload);
 
   if (record)
-    res.status(200).json({
+    return res.status(200).json({
       data: { record: record.fields },
     });
   res.status(404).send("Record not found!");
@@ -34,11 +34,11 @@ export default async function handler(req, res) {
   const { id } = req.query;
   const user = await User.findByPk(id);
 
-  if (!user) res.status(404).send("User not found!");
+  if (!user) return res.status(404).send("User not found!");
   const recordId = user.record_id;
 
   // User with no record created
-  if (!recordId) res.status(200).json({ data: { record: null } });
+  if (!recordId) return res.status(200).json({ data: { record: null } });
 
   switch (req.method) {
     case "GET":

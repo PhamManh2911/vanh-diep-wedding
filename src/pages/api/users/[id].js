@@ -11,7 +11,7 @@ export default async function handler(req, res) {
     const { id } = req.query;
     const user = await User.findByPk(id);
 
-    if (!user) res.status(404).send("User id not found!");
+    if (!user) return res.status(404).send("User id not found!");
     res.status(200).json({ data: { user } });
   } else {
     res.status(400).send("Method not found!");
