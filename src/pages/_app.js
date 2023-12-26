@@ -1,7 +1,7 @@
-import theme from '@/configs/theme';
+import theme from "@/configs/theme";
 
-import { ThemeProvider } from '@mui/material';
-import '@/styles/globals.css'
+import { ThemeProvider } from "@mui/material";
+import "@/styles/globals.css";
 
 export default function App({ Component, pageProps }) {
   return (
