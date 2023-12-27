@@ -14,45 +14,36 @@ import Image from "next/image";
 import { appHostname, nha } from "@/configs/app";
 import { Button } from "@/components/Buttons";
 import { sansserif } from "../../../public/fonts";
+import { convertToPng } from "@/utils/image";
 
-function InvitationImage({ src, sx = {}, imageSx, ...props }) {
+function InvitationImage({ src, loading, sx = {}, imageSx, ...props }) {
   if (sx && sx.width && !sx.height) sx.height = "auto";
   if (sx && sx.height && !sx.width) sx.width = "auto";
-  // const [copied, setCopied] = useState(false);
-  // const [downloaded, setDownloaded] = useState(false);
+  const [copying, setCopying] = useState(false);
+  const [downloading, setDownloading] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
-  // const blobData = useMemo(async () => {
-  //   const response = await axios(src);
-  //   return await response.blob();
-  // }, [src]);
+  const handleDownloadImage = () => {
+    setDownloading(true);
 
-  // const handleDownloadImage = () => {
-  //   setDownloaded(true);
-  //   const url = window.URL.createObjectURL(blobData);
-  //   const a = document.createElement('a');
+    const anchor = document.createElement("a");
 
-  //   a.style.display = 'none';
-  //   a.href = src;
-  //   a.download = 'thiep_cuoi'
-  //   document.body.appendChild(a);
-  //   a.click();
-  //   window.URL.revokeObjectURL(url);
+    anchor.href = src;
+    anchor.download = "thiepcuoi.jpeg";
+    document.body.appendChild(anchor);
+    anchor.click();
+    document.body.removeChild(anchor);
 
-  //   setTimeout(() => {
-  //     setDownloaded(false);
-  //   }, 1000);
-  // }
+    setTimeout(() => {
+      setDownloading(false);
+    }, 1000);
+  };
 
-  // const handleCopyImage = async () => {
-  //   setCopied(true);
-  //   const data = [new ClipboardItem({ [blobData.type]: blobData })];
+  const handleCopyImage = () => {
+    setCopying(true);
 
-  //   await navigator.clipboard.write(data);
-
-  //   setTimeout(() => {
-  //     setCopied(false);
-  //   }, 1000);
-  // }
+    convertToPng(src, () => setCopying(false));
+  };
 
   return (
     <Box
@@ -77,7 +68,27 @@ function InvitationImage({ src, sx = {}, imageSx, ...props }) {
         }}
         placeholder="blur"
         blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/ONHPQAJLQNkv3eBgwAAAABJRU5ErkJggg=="
+        onLoad={() => setImageLoaded(true)}
       />
+      {!loading && imageLoaded && (
+        <Box
+          display="flex"
+          gap="10px"
+          padding="20px"
+          sx={{ position: "absolute", top: 0, right: 0 }}
+        >
+          <Button
+            text={copying ? "Copying..." : "Copy"}
+            onClick={handleCopyImage}
+            disable={copying}
+          />
+          <Button
+            text={downloading ? "Downloading..." : "Download"}
+            onClick={handleDownloadImage}
+            disable={downloading}
+          />
+        </Box>
+      )}
     </Box>
   );
 }
@@ -99,7 +110,7 @@ export default function AdminPage() {
     const response = await axios.post(`${appHostname}/api/users`, { userName });
     const user = response.data.data.user;
 
-    setImageUrl(`${appHostname}/api/invitation/${user.id}?removeCache=true`);
+    setImageUrl(`/api/invitation/${user.id}`);
     const queryParams = {
       name: userName,
       form,
@@ -273,7 +284,12 @@ export default function AdminPage() {
               Ảnh thiệp mời
             </Typography>
             {imageUrl ? (
-              <InvitationImage src={imageUrl} width={612} height={476} />
+              <InvitationImage
+                src={imageUrl}
+                width={612}
+                height={476}
+                loading={loading}
+              />
             ) : (
               <Stack
                 justifyContent="center"
