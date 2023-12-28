@@ -12,55 +12,88 @@ export const CoupleSession = forwardRef(function Couple(_, ref) {
   const theme = useTheme();
   const { isPhone } = useMedia();
   const nhaTrai = nha === "trai";
-  const [state, setState] = useState(nhaTrai ? "100%" : "0%");
+  const [state, setState] = useState(nhaTrai);
   const handleClick = () => {
-    return state === "100%" ? setState("0%") : setState("100%");
+    setState((prev) => !prev);
   };
   return isPhone ? (
-    <Box height={780} ref={ref}>
-      <Stack
-        sx={{
-          background: `linear-gradient(180deg, rgba(247, 250, 255, 0.00) 0%, rgba(247, 250, 255, 0.00) 10.66%, rgba(247, 250, 255, 0.00) 35.92%), linear-gradient(180deg, rgba(247, 250, 255, 0.20) 0%, rgba(247, 250, 255, 0.00) 28.33%), linear-gradient(180deg, rgba(255, 255, 255, 0.20) 8.85%, rgba(247, 250, 255, 0.00) 36.46%), linear-gradient(180deg, rgba(255, 255, 255, 0.20) 4.2%, rgba(247, 250, 255, 0.00) 36.68%), url("/images/bg-mobile.png") ${state} / cover no-repeat`,
-          boxShadow: "10px 10px 100px 0px #F7FAFF inset",
-          position: "relative",
-          height: "100%",
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
-        }}
-        className={`background-image ${
-          state === "100%" ? "slide-in" : "slide-out"
-        }`}
+    <Stack
+      position="relative"
+      height={780}
+      width="100%"
+      ref={ref}
+      padding="32px 0"
+    >
+      <Typography
+        variant="headline1"
+        color={theme.palette.neutral.dark}
+        textAlign="center"
+        zIndex={2}
       >
-        {state === "100%" ? (
-          <button
-            onClick={handleClick}
-            style={{
-              width: "30px",
-              height: "30px",
-              margin: "auto 0px",
-              border: "none",
-              background: "transparent",
-            }}
-          >
-            <PrevIcon />
-          </button>
-        ) : (
-          <button
-            onClick={handleClick}
-            style={{
-              width: "30px",
-              height: "30px",
-              margin: "auto 90%",
-              border: "none",
-              background: "transparent",
-            }}
-          >
-            <NextIcon />
-          </button>
-        )}
-      </Stack>
-    </Box>
+        CÔ DÂU & CHÚ RỂ
+      </Typography>
+      <Image
+        src="/images/couple-bride.png"
+        alt="couple bride"
+        quality={100}
+        fill
+        sizes="100vw"
+        placeholder="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/ONHPQAJLQNkv3eBgwAAAABJRU5ErkJggg=="
+        style={{
+          objectFit: "cover",
+          transition: theme.transitions.create(["all"], {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.enteringScreen,
+          }),
+          transform: state ? "translateX(-100%)" : "",
+        }}
+      />
+      <Image
+        src="/images/couple-groom.png"
+        alt="couple bride"
+        quality={100}
+        fill
+        sizes="100vw"
+        placeholder="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/ONHPQAJLQNkv3eBgwAAAABJRU5ErkJggg=="
+        style={{
+          objectFit: "cover",
+          transition: theme.transitions.create(["all"], {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.enteringScreen,
+          }),
+          transform: state ? "" : "translateX(100%)",
+        }}
+      />
+      {state ? (
+        <button
+          onClick={handleClick}
+          style={{
+            width: "30px",
+            height: "30px",
+            margin: "auto 0px",
+            border: "none",
+            background: "transparent",
+            zIndex: 1,
+          }}
+        >
+          <PrevIcon />
+        </button>
+      ) : (
+        <button
+          onClick={handleClick}
+          style={{
+            width: "30px",
+            height: "30px",
+            margin: "auto 90%",
+            border: "none",
+            background: "transparent",
+            zIndex: 1,
+          }}
+        >
+          <NextIcon />
+        </button>
+      )}
+    </Stack>
   ) : (
     <Box
       ref={ref}
