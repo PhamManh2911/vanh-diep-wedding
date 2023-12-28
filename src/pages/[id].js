@@ -10,8 +10,8 @@ import { AlbumSession } from "@/components/Album";
 import { MungCuoiSession } from "@/components/MungCuoi";
 import { InvitationSession } from "@/components/Invitation";
 import { Form } from "@/components/Form";
-import { MediaProvider } from "@/providers/MediaProvider";
 import { Footer } from "@/components/Footer";
+import { NavBar } from "@/components/Layout/NavBar";
 
 const UserContext = createContext();
 
@@ -31,9 +31,8 @@ export async function getServerSideProps(context) {
 export default function Wedding({ user }) {
   const { username } = user;
 
-  const handleScrollToView = (dom) => {
-    return () => dom.scrollIntoView({ behavior: "smooth" });
-  };
+  const handleScrollToView = (dom) =>
+    dom.scrollIntoView({ behavior: "smooth" });
 
   const eventRef = useRef();
   const coupleRef = useRef();
@@ -42,25 +41,23 @@ export default function Wedding({ user }) {
 
   return (
     <UserContext.Provider value={{ user }}>
-      <MediaProvider>
-        <Stack>
-          <Form />
-          <InvitationSession
-            username={username}
-            clickEvent={handleScrollToView(eventRef.current)}
-            clickCouple={handleScrollToView(coupleRef.current)}
-            clickAlbum={handleScrollToView(albumRef.current)}
-            clickMungCuoi={handleScrollToView(mungCuoiRef.current)}
-          />
-          <CountDown />
-          <EventSession ref={eventRef} />
-          <CoupleSession ref={coupleRef} />
-          <TimelineSession />
-          <AlbumSession ref={albumRef} />
-          <MungCuoiSession ref={mungCuoiRef} />
-          <Footer />
-        </Stack>
-      </MediaProvider>
+      <Stack>
+        <NavBar
+          clickEvent={() => handleScrollToView(eventRef.current)}
+          clickCouple={() => handleScrollToView(coupleRef.current)}
+          clickAlbum={() => handleScrollToView(albumRef.current)}
+          clickMungCuoi={() => handleScrollToView(mungCuoiRef.current)}
+        />
+        <Form />
+        <InvitationSession username={username} />
+        <CountDown />
+        <EventSession ref={eventRef} />
+        <CoupleSession ref={coupleRef} />
+        <TimelineSession />
+        <AlbumSession ref={albumRef} />
+        <MungCuoiSession ref={mungCuoiRef} />
+        <Footer />
+      </Stack>
     </UserContext.Provider>
   );
 }

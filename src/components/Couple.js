@@ -17,7 +17,7 @@ export const CoupleSession = forwardRef(function Couple(_, ref) {
     return state === "100%" ? setState("0%") : setState("100%");
   };
   return isPhone ? (
-    <Box height={780}>
+    <Box height={780} ref={ref}>
       <Stack
         sx={{
           background: `linear-gradient(180deg, rgba(247, 250, 255, 0.00) 0%, rgba(247, 250, 255, 0.00) 10.66%, rgba(247, 250, 255, 0.00) 35.92%), linear-gradient(180deg, rgba(247, 250, 255, 0.20) 0%, rgba(247, 250, 255, 0.00) 28.33%), linear-gradient(180deg, rgba(255, 255, 255, 0.20) 8.85%, rgba(247, 250, 255, 0.00) 36.46%), linear-gradient(180deg, rgba(255, 255, 255, 0.20) 4.2%, rgba(247, 250, 255, 0.00) 36.68%), url("/images/bg-mobile.png") ${state} / cover no-repeat`,
