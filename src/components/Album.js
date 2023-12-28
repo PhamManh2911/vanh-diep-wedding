@@ -5,6 +5,7 @@ import Image from "next/image";
 
 import { useMedia } from "@/providers/MediaProvider";
 import { Button } from "./Buttons";
+import { AlbumFlower } from "./Flower/AlbumFlower";
 
 const desktopAlbum = [
   {
@@ -182,14 +183,7 @@ export const AlbumSession = forwardRef(function AlbumSession(_, ref) {
         >
           ALBUM ẢNH CƯỚI
         </Typography>
-        <Image
-          src={
-            isPhone ? "/icons/album-deco-phone.svg" : "/icons/album-deco.svg"
-          }
-          width={212}
-          height={120}
-          alt="album deco"
-        />
+        <AlbumFlower />
         <Typography
           variant="display"
           color={theme.palette.primary.dark}

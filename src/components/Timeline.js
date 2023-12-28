@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useMedia } from "@/providers/MediaProvider";
 import { nha } from "@/configs/app";
 import { bellissima } from "../../public/fonts";
+import { TimelineFlower } from "./Flower/TimelineFlower";
 
 function VerticalDivider({ disableVertical }) {
   const theme = useTheme();
@@ -32,14 +33,13 @@ function VerticalDivider({ disableVertical }) {
   );
 }
 
-function EventIcon({ src, justifyContent }) {
+function EventIcon({ src, alignItems }) {
   const { isPhone } = useMedia();
 
   return (
     <Stack
       width={isPhone ? 150 : 420}
-      justifyContent="center"
-      alignItems="center"
+      alignItems={alignItems}
       gap="8px"
       padding={isPhone ? "4px" : "8px"}
     >
@@ -101,31 +101,22 @@ function EventDecs({ children, justifyContent, textAlign }) {
   );
 }
 
-// function EventMessage({ children, alignItems, textAlign }) {
-//   const theme = useTheme();
-
-//   return (
-//     <Stack sx={{ justifyContent: 'center', alignItems, gap: '8px', alignSelf: 'stretch' }}>
-//       <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
-//         <Typography variant="body" color={theme.palette.neutral.dark} sx={{ width: 276, textAlign }}>
-//           {children}
-//         </Typography>
-//       </Box>
-//     </Stack>
-//   );
-// }
-
 export function TimelineSession() {
   const theme = useTheme();
   const { isPhone } = useMedia();
   const isHomeBoy = nha === "trai";
+
   return (
     <Stack
-      sx={{ padding: isPhone ? "16px 0 24px" : "64px 0 24px" }}
+      sx={{ padding: isPhone ? "16px 0 24px" : "64px 0 154px" }}
       alignItems="center"
       gap={isPhone ? "8px" : "32px"}
       alignSelf="stretch"
+      position="relative"
     >
+      {!isPhone && (
+        <TimelineFlower sx={{ position: "absolute", top: 587, left: 0 }} />
+      )}
       <Typography
         variant="headline1"
         color={theme.palette.primary.dark}
@@ -145,34 +136,21 @@ export function TimelineSession() {
           height={isPhone ? 84 : 140}
           sx={{ display: "flex", alignItems: "flex-start", gap: "8px" }}
         >
-          <EventIcon src="/icons/record.svg" justifyContent="flex-end" />
+          <EventIcon src="/images/record.png" alignItems="flex-end" />
           <VerticalDivider />
           <EventContentWrapper alignItems="flex-start">
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "flex-start",
-                justifyContent: "flex-start",
-                gap: "8px",
-                flexDirection: isPhone ? "column" : "row",
-              }}
+            <Stack
+              alignItems="flex-start"
+              justifyContent="flex-start"
+              gap={isPhone ? "4px" : "8px"}
             >
               <Typography
-                variant="headline2"
+                variant="title"
                 textAlign="left"
                 color={theme.palette.neutral.dark}
               >
                 {isHomeBoy ? "09:00 SÁNG" : "07:00 SÁNG"}
               </Typography>
-              {isPhone ? null : (
-                <Typography
-                  variant="headline2"
-                  textAlign="center"
-                  color={theme.palette.neutral.dark}
-                >
-                  :
-                </Typography>
-              )}
               <Typography
                 variant="headline2"
                 textAlign="left"
@@ -180,13 +158,10 @@ export function TimelineSession() {
               >
                 {isHomeBoy ? "ĐÓN KHÁCH" : "LÀM LỄ"}
               </Typography>
-            </Box>
+            </Stack>
             <EventDecs justifyContent="flex-start" textAlign="left">
               Sự hiện diện quý giá
             </EventDecs>
-            {/* <EventMessage alignItems="flex-start" textAlign='left'>
-              Gia đình chúng tôi rất hân hạnh được đón tiếp quý khách trong một ngày trọng đại như thế này! 
-            </EventMessage> */}
           </EventContentWrapper>
         </Box>
         <Box
@@ -194,31 +169,18 @@ export function TimelineSession() {
           sx={{ display: "flex", alignItems: "flex-start", gap: "8px" }}
         >
           <EventContentWrapper alignItems="flex-end">
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "flex-end",
-                justifyContent: "flex-end",
-                gap: "8px",
-                flexDirection: isPhone ? "column" : "row",
-              }}
+            <Stack
+              alignItems="flex-end"
+              justifyContent="flex-end"
+              gap={isPhone ? "4px" : "8px"}
             >
               <Typography
-                variant="headline2"
+                variant="title"
                 textAlign="right"
                 color={theme.palette.neutral.dark}
               >
                 {isHomeBoy ? "09:30 SÁNG" : "07:30 SÁNG"}
               </Typography>
-              {isPhone ? null : (
-                <Typography
-                  variant="headline2"
-                  textAlign="center"
-                  color={theme.palette.neutral.dark}
-                >
-                  :
-                </Typography>
-              )}
               <Typography
                 variant="headline2"
                 textAlign="right"
@@ -226,49 +188,33 @@ export function TimelineSession() {
               >
                 {isHomeBoy ? "LÀM LỄ" : "ĐƯA DÂU"}
               </Typography>
-            </Box>
+            </Stack>
             <EventDecs justifyContent="flex-end" textAlign="right">
               Giây phút thiêng liêng
             </EventDecs>
-            {/* <EventMessage alignItems="flex-end" textAlign='right'>
-              Việt Anh & Ngọc Diệp chính thức nên vợ nên chồng, cảm ơn quý khách hiện diện trong khoảnh khắc một đời! 
-            </EventMessage> */}
           </EventContentWrapper>
           <VerticalDivider />
-          <EventIcon src="/icons/rings.svg" justifyContent="flex-start" />
+          <EventIcon src="/images/rings.png" />
         </Box>
         <Box
           height={isPhone ? 84 : 140}
           sx={{ display: "flex", alignItems: "flex-start", gap: "8px" }}
         >
-          <EventIcon src="/icons/champagne.svg" justifyContent="flex-end" />
+          <EventIcon src="/images/champagne.png" alignItems="flex-end" />
           <VerticalDivider />
           <EventContentWrapper alignItems="flex-start">
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "flex-start",
-                justifyContent: "flex-start",
-                gap: "8px",
-                flexDirection: isPhone ? "column" : "row",
-              }}
+            <Stack
+              alignItems="flex-start"
+              justifyContent="flex-start"
+              gap={isPhone ? "4px" : "8px"}
             >
               <Typography
-                variant="headline2"
+                variant="title"
                 textAlign="left"
                 color={theme.palette.neutral.dark}
               >
                 {isHomeBoy ? "10:30 SÁNG" : "09:30 SÁNG"}
               </Typography>
-              {isPhone ? null : (
-                <Typography
-                  variant="headline2"
-                  textAlign="center"
-                  color={theme.palette.neutral.dark}
-                >
-                  :
-                </Typography>
-              )}
               <Typography
                 variant="headline2"
                 textAlign="left"
@@ -276,13 +222,10 @@ export function TimelineSession() {
               >
                 {isHomeBoy ? "NHẬP TIỆC" : "LỄ THÀNH HÔN"}
               </Typography>
-            </Box>
+            </Stack>
             <EventDecs justifyContent="flex-start" textAlign="left">
               Thưởng thức ẩm thực
             </EventDecs>
-            {/* <EventMessage alignItems="flex-start" textAlign='left'>
-              Gia đình kính mời quý khách dùng bữa, nếm trọn hương vị cỗ cưới miền Bắc đặc trưng.
-            </EventMessage> */}
           </EventContentWrapper>
         </Box>
         <Box
@@ -290,31 +233,18 @@ export function TimelineSession() {
           sx={{ display: "flex", alignItems: "flex-start", gap: "8px" }}
         >
           <EventContentWrapper alignItems="flex-end">
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "flex-end",
-                justifyContent: "flex-end",
-                gap: "8px",
-                flexDirection: isPhone ? "column" : "row",
-              }}
+            <Stack
+              alignItems="flex-end"
+              justifyContent="flex-end"
+              gap={isPhone ? "4px" : "8px"}
             >
               <Typography
-                variant="headline2"
+                variant="title"
                 textAlign="right"
                 color={theme.palette.neutral.dark}
               >
                 {isHomeBoy ? "12:00 SÁNG" : "10:30 SÁNG"}
               </Typography>
-              {isPhone ? null : (
-                <Typography
-                  variant="headline2"
-                  textAlign="center"
-                  color={theme.palette.neutral.dark}
-                >
-                  :
-                </Typography>
-              )}
               <Typography
                 variant="headline2"
                 textAlign="right"
@@ -322,18 +252,25 @@ export function TimelineSession() {
               >
                 {isHomeBoy ? "GIAO LƯU VĂN NGHỆ" : "NHẬP TIỆC"}
               </Typography>
-            </Box>
+            </Stack>
             <EventDecs justifyContent="flex-end" textAlign="left">
               Niềm vui bất tận
             </EventDecs>
-            {/* <EventMessage alignItems="flex-end" textAlign='right'>
-              Kính mời quý khách cùng gia đình giao lưu văn nghệ và tham gia vào tiết mục đón hoa cưới may mắn. 
-            </EventMessage> */}
           </EventContentWrapper>
           <VerticalDivider disableVertical />
-          <EventIcon src="/icons/party.svg" justifyContent="flex-start" />
+          <EventIcon src="/images/party.png" />
         </Box>
       </Stack>
+      {!isPhone && (
+        <TimelineFlower
+          sx={{
+            position: "absolute",
+            top: 232,
+            right: 0,
+            transform: "rotateY(180deg)",
+          }}
+        />
+      )}
     </Stack>
   );
 }

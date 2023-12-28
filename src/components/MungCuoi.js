@@ -5,6 +5,7 @@ import { Box, Dialog, Stack, Typography, useTheme } from "@mui/material";
 import { nha } from "@/configs/app";
 import { Button } from "./Buttons";
 import { useMedia } from "@/providers/MediaProvider";
+import { MungCuoiFlower, MungCuoiFlowerMobile } from "./Flower/MungCuoiFlower";
 
 export const MungCuoiSession = forwardRef(function MungCuoiSession({}, ref) {
   const theme = useTheme();
@@ -47,10 +48,11 @@ export const MungCuoiSession = forwardRef(function MungCuoiSession({}, ref) {
           }}
         >
           <Image
-            src="/images/hom-cuoi-flower-left.png"
+            src="/images/floral-2.png"
             width={isPhone ? 24 : 80}
             height={isPhone ? 24 : 80}
             alt="hom cuoi deco left"
+            style={{ rotate: "90deg" }}
           />
           <Typography
             variant="headline1"
@@ -59,10 +61,11 @@ export const MungCuoiSession = forwardRef(function MungCuoiSession({}, ref) {
             HÒM MỪNG CƯỚI
           </Typography>
           <Image
-            src="/images/hom-cuoi-flower-right.png"
+            src="/images/floral-2.png"
             width={isPhone ? 24 : 80}
             height={isPhone ? 24 : 80}
             alt="hom cuoi deco right"
+            style={{ rotate: "90deg", transform: "rotateX(180deg)" }}
           />
         </Box>
         <Typography variant="body" color={theme.palette.primary.dark}>
@@ -78,22 +81,7 @@ export const MungCuoiSession = forwardRef(function MungCuoiSession({}, ref) {
           gap: isPhone ? 0 : "32px",
         }}
       >
-        {isPhone ? (
-          <Image
-            width={63}
-            height={140}
-            style={{ alignItems: "flex-start" }}
-            src="/icons/bank-deco-left-phone.svg"
-            alt="bank deco left phone"
-          />
-        ) : (
-          <Image
-            width={356}
-            height={216}
-            src="/icons/bank-deco-left.svg"
-            alt="bank deco left phone"
-          />
-        )}
+        {!isPhone && <MungCuoiFlower />}
         <Stack
           gap={isPhone ? 0 : "32px"}
           paddingBottom={isPhone ? "8px" : "32px"}
@@ -107,12 +95,16 @@ export const MungCuoiSession = forwardRef(function MungCuoiSession({}, ref) {
               flexDirection: isPhone ? "column" : "row",
             }}
           >
-            <Image
-              src={nhaTrai ? "/images/qr-groom.png" : "/images/qr-bride.png"}
-              width={226}
-              height={224}
-              alt="qr"
-            />
+            <Box display="flex" gap="4px" alignItems="flex-end">
+              {isPhone && <MungCuoiFlowerMobile />}
+              <Image
+                src={nhaTrai ? "/images/qr-groom.png" : "/images/qr-bride.png"}
+                width={226}
+                height={224}
+                alt="qr"
+              />
+              {isPhone && <MungCuoiFlowerMobile transform="rotateY(180deg)" />}
+            </Box>
             <Stack
               padding={isPhone ? "16px 32px" : "32px 0"}
               gap={isPhone ? "16px" : "32px"}
@@ -273,22 +265,7 @@ export const MungCuoiSession = forwardRef(function MungCuoiSession({}, ref) {
             </>
           )}
         </Stack>
-        {isPhone ? (
-          <Image
-            width={63}
-            height={140}
-            style={{ alignItems: "flex-start" }}
-            src="/icons/bank-deco-right-phone.svg"
-            alt="bank deco right phone"
-          />
-        ) : (
-          <Image
-            width={356}
-            height={216}
-            src="/icons/bank-deco-right.svg"
-            alt="bank deco right phone"
-          />
-        )}
+        {!isPhone && <MungCuoiFlower transform="rotateY(180deg)" />}
       </Box>
     </Stack>
   );

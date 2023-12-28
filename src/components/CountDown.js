@@ -38,21 +38,13 @@ export function CountDown() {
     <Box
       sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
     >
-      {isPhone ? (
-        <Image
-          src="/icons/countdown-deco-left-phone.svg"
-          width={64}
-          height={64}
-          alt="countdown deco left phone"
-        />
-      ) : (
-        <Image
-          src="/icons/countdown-deco-left.svg"
-          width={160}
-          height={160}
-          alt="countdown deco left"
-        />
-      )}
+      <Image
+        src="/images/floral-3.png"
+        width={isPhone ? 64 : 160}
+        height={isPhone ? 64 : 160}
+        alt="countdown deco left"
+        style={{ transform: "rotate(-90deg)" }}
+      />
       <Stack
         padding={isPhone ? "0" : "16px 0px"}
         alignItems="center"
@@ -231,21 +223,13 @@ export function CountDown() {
           </Stack>
         </Box>
       </Stack>
-      {isPhone ? (
-        <Image
-          src="/icons/countdown-deco-right-phone.svg"
-          width={64}
-          height={64}
-          alt="countdown deco right phone"
-        />
-      ) : (
-        <Image
-          src="/icons/countdown-deco-right.svg"
-          width={160}
-          height={160}
-          alt="countdown deco right"
-        />
-      )}
+      <Image
+        src="/images/floral-3.png"
+        width={isPhone ? 64 : 160}
+        height={isPhone ? 64 : 160}
+        alt="countdown deco right"
+        style={{ transform: "rotateX(180deg)", rotate: "-90deg" }}
+      />
     </Box>
   );
 }

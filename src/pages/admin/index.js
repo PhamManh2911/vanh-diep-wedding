@@ -47,11 +47,13 @@ function InvitationImage({ src, loading, sx = {}, imageSx, ...props }) {
 
   return (
     <Box
+      width={612}
+      height={476}
+      position="relative"
       sx={{
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        position: "relative",
         ...sx,
       }}
       {...props}
@@ -284,12 +286,7 @@ export default function AdminPage() {
               Ảnh thiệp mời
             </Typography>
             {imageUrl ? (
-              <InvitationImage
-                src={imageUrl}
-                width={612}
-                height={476}
-                loading={loading}
-              />
+              <InvitationImage src={imageUrl} loading={loading} />
             ) : (
               <Stack
                 justifyContent="center"

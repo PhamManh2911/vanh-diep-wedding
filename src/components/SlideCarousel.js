@@ -15,17 +15,17 @@ const genProps = (absPos) => {
 
   return {
     transform: `translateX(${339 * relPos}px)`,
+    zIndex: 0,
   };
 };
 
 const genCommonStyle = (theme) => ({
-  width: 327,
-  height: 180,
   borderRadius: "8px",
   position: "absolute",
   top: "50%",
   left: "50%",
   translate: "-50% -50%",
+  zIndex: 1,
   transition: theme.transitions.create(["all"], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.enteringScreen,
@@ -52,7 +52,6 @@ export function SlideCarousel() {
       padding="16px 0"
       gap="8px"
       width="100%"
-      height={260}
     >
       <Box
         sx={{
@@ -88,6 +87,7 @@ export function SlideCarousel() {
             width={327}
             height={180}
             alt="slide carousel"
+            priority
           />
         ))}
       </Box>
@@ -109,7 +109,7 @@ export function SlideCarousel() {
             style={{ cursor: "pointer" }}
             width={index === current ? 12 : 8}
             height={index === current ? 12 : 8}
-            alt="dot phone"
+            alt="dot"
           />
         ))}
       </Box>

@@ -7,11 +7,13 @@ import { bellissima } from "../../public/fonts";
 
 const zIndex = 1000;
 const opacity = 1;
+const width = 800;
+const height = 464;
 
 const genCommonSx = (theme) => ({
   position: "absolute",
-  aspectRatio: "17/10",
-  width: "800px",
+  width,
+  height,
   top: "50%",
   left: "50%",
   translate: "-50% -50%",
@@ -26,13 +28,6 @@ const genCommonSx = (theme) => ({
     duration: theme.transitions.duration.enteringScreen,
   }),
   overflow: "hidden",
-});
-
-const genCommonStyle = (theme) => ({
-  transition: theme.transitions.create(["all"], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.enteringScreen,
-  }),
 });
 
 const images = [
@@ -146,10 +141,13 @@ export function ThreeDCarousel() {
             )}
             <Image
               src={image}
-              style={genCommonStyle(theme)}
-              width={800}
-              height={464}
               alt="carousel"
+              priority
+              quality={100}
+              fill
+              sizes="100vw"
+              placeholder="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/ONHPQAJLQNkv3eBgwAAAABJRU5ErkJggg=="
+              style={{ objectFit: "cover" }}
             />
           </Box>
         ))}

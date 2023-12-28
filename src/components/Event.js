@@ -124,29 +124,52 @@ export const EventSession = forwardRef(function EventSession(_, ref) {
           height={isPhone ? 240 : 360}
           justifyContent="flex-end"
           alignItems="center"
-          sx={{
-            borderRadius: "50%",
-            background: `url(${
-              isPhone ? "/images/event-phone.png" : "/images/event.png"
-            }), lightgray -170.412px -351.331px / 174.577% 261.833% no-repeat`,
-          }}
+          position="relative"
+          sx={{ borderRadius: "50%" }}
         >
+          <Image
+            alt="event image"
+            src="/images/event.png"
+            placeholder="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/ONHPQAJLQNkv3eBgwAAAABJRU5ErkJggg=="
+            quality={100}
+            fill
+            sizes="100vw"
+            style={{ objectFit: "cover" }}
+          />
           {isPhone ? (
-            <Image
-              src="/icons/event-deco-phone.svg"
-              width={289}
-              height={187}
-              alt="event deco phone"
-              style={{ top: "70px", position: "relative" }}
-            />
+            <>
+              <Image
+                src="/images/floral-1.png"
+                alt="floral 1"
+                width={159}
+                height={161}
+                style={{ position: "absolute", zIndex: 1, top: "55%", left: "-9%", rotate: "-80deg", transform: "rotateY(180deg)" }}
+              />
+              <Image
+                src="/images/floral-3.png"
+                alt="floral 1"
+                width={159}
+                height={161}
+                style={{ position: "absolute", zIndex: 1, top: "55%", right: "-9%", rotate: "100deg", transform: "rotateY(180deg)" }}
+              />
+            </>
           ) : (
-            <Image
-              src="/icons/event-deco.svg"
-              width={428}
-              height={270}
-              alt="event deco"
-              style={{ top: "100px", position: "relative" }}
-            />
+            <>
+              <Image
+                src="/images/floral-1.png"
+                alt="floral 1"
+                width={236}
+                height={238}
+                style={{ position: "absolute", zIndex: 1, top: "55%", left: "-9%", rotate: "-80deg", transform: "rotateY(180deg)" }}
+              />
+              <Image
+                src="/images/floral-3.png"
+                alt="floral 1"
+                width={236}
+                height={238}
+                style={{ position: "absolute", zIndex: 1, top: "55%", right: "-9%", rotate: "100deg", transform: "rotateY(180deg)" }}
+              />
+            </>
           )}
         </Stack>
         <Stack
