@@ -124,6 +124,7 @@ export function ThreeDCarousel() {
                     position: "absolute",
                     left: "0%",
                     cursor: "pointer",
+                    zIndex: 1,
                   }}
                   onClick={handlePrev}
                 ></Box>
@@ -134,6 +135,7 @@ export function ThreeDCarousel() {
                     position: "absolute",
                     left: "60%",
                     cursor: "pointer",
+                    zIndex: 1,
                   }}
                   onClick={handleNext}
                 ></Box>
