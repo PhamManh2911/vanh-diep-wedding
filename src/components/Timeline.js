@@ -71,7 +71,7 @@ function EventContentWrapper({ children, alignItems }) {
   );
 }
 
-function EventDecs({ children, justifyContent, textAlign }) {
+function EventDecs({ children, justifyContent }) {
   const theme = useTheme();
   const { isPhone } = useMedia();
 
@@ -89,10 +89,10 @@ function EventDecs({ children, justifyContent, textAlign }) {
       <Typography
         sx={{
           color: theme.palette.primary.main,
-          textAlign,
           fontFamily: bellissima.style.fontFamily,
           fontSize: isPhone ? 20 : 32,
           lineHeight: isPhone ? "30px" : "40px",
+          letterSpacing: "normal",
         }}
       >
         {children}
@@ -159,7 +159,7 @@ export function TimelineSession() {
                 {isHomeBoy ? "ĐÓN KHÁCH" : "LÀM LỄ"}
               </Typography>
             </Stack>
-            <EventDecs justifyContent="flex-start" textAlign="left">
+            <EventDecs justifyContent="flex-start">
               Sự hiện diện quý giá
             </EventDecs>
           </EventContentWrapper>
@@ -189,7 +189,7 @@ export function TimelineSession() {
                 {isHomeBoy ? "LÀM LỄ" : "ĐƯA DÂU"}
               </Typography>
             </Stack>
-            <EventDecs justifyContent="flex-end" textAlign="right">
+            <EventDecs justifyContent="flex-end">
               Giây phút thiêng liêng
             </EventDecs>
           </EventContentWrapper>
@@ -223,7 +223,7 @@ export function TimelineSession() {
                 {isHomeBoy ? "NHẬP TIỆC" : "LỄ THÀNH HÔN"}
               </Typography>
             </Stack>
-            <EventDecs justifyContent="flex-start" textAlign="left">
+            <EventDecs justifyContent="flex-start">
               Thưởng thức ẩm thực
             </EventDecs>
           </EventContentWrapper>
@@ -253,9 +253,7 @@ export function TimelineSession() {
                 {isHomeBoy ? "GIAO LƯU VĂN NGHỆ" : "NHẬP TIỆC"}
               </Typography>
             </Stack>
-            <EventDecs justifyContent="flex-end" textAlign="left">
-              Niềm vui bất tận
-            </EventDecs>
+            <EventDecs justifyContent="flex-end">Niềm vui bất tận</EventDecs>
           </EventContentWrapper>
           <VerticalDivider disableVertical />
           <EventIcon src="/images/party.png" />

@@ -42,6 +42,7 @@ export default function Invitation({ user }) {
           fontSize: "114px",
           fontWeight: "400",
           lineHeight: "128px",
+          letterSpacing: "normal",
         }}
       >
         {user.username}

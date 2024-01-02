@@ -1,12 +1,34 @@
 import { forwardRef, useState } from "react";
 import Image from "next/image";
-import { Box, Stack, Typography, useTheme } from "@mui/material";
+import { Box, Stack, Typography, useTheme, styled } from "@mui/material";
 
 import { nha } from "@/configs/app";
 import { useMedia } from "@/providers/MediaProvider";
 import NextIcon from "./Icons/NextIcon";
 import PrevIcon from "./Icons/PrevIcon";
 import { bellissima } from "../../public/fonts";
+
+const WishTypographyDesktop = styled(Typography)(({ theme }) => ({
+  color: theme.palette.neutral.dark,
+  textAlign: "center",
+  fontFamily: bellissima.style.fontFamily,
+  fontSize: "24px",
+  fontWeight: "400",
+  lineHeight: "32px",
+  alignSelf: "stretch",
+  letterSpacing: "normal",
+}));
+
+const WishTypographyPhone = styled(Typography)(({ theme }) => ({
+  color: theme.palette.neutral.dark,
+  textAlign: "center",
+  fontFamily: bellissima.style.fontFamily,
+  fontSize: "16px",
+  fontWeight: "400",
+  lineHeight: "20px",
+  alignSelf: "stretch",
+  letterSpacing: "normal",
+}));
 
 export const CoupleSession = forwardRef(function Couple(_, ref) {
   const theme = useTheme();
@@ -17,53 +39,147 @@ export const CoupleSession = forwardRef(function Couple(_, ref) {
     setState((prev) => !prev);
   };
   return isPhone ? (
-    <Stack
-      position="relative"
-      height={780}
-      width="100%"
-      ref={ref}
-      padding="32px 0"
-    >
-      <Typography
-        variant="headline1"
-        color={theme.palette.neutral.dark}
-        textAlign="center"
-        zIndex={2}
-      >
-        CÔ DÂU & CHÚ RỂ
-      </Typography>
-      <Image
-        src="/images/couple-bride.png"
-        alt="couple bride"
-        quality={100}
-        fill
-        sizes="100vw"
-        placeholder="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/ONHPQAJLQNkv3eBgwAAAABJRU5ErkJggg=="
-        style={{
-          objectFit: "cover",
+    <Stack position="relative" height={780} width="100%" ref={ref}>
+      <Stack
+        width="100%"
+        height={780}
+        position="absolute"
+        sx={{
           transition: theme.transitions.create(["all"], {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen,
           }),
           transform: state ? "translateX(-100%)" : "",
         }}
-      />
-      <Image
-        src="/images/couple-groom.png"
-        alt="couple bride"
-        quality={100}
-        fill
-        sizes="100vw"
-        placeholder="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/ONHPQAJLQNkv3eBgwAAAABJRU5ErkJggg=="
-        style={{
-          objectFit: "cover",
+        padding="32px 0"
+        alignItems="center"
+      >
+        <Image
+          src="/images/couple-bride.jpeg"
+          alt="couple bride"
+          quality={100}
+          fill
+          sizes="100vw"
+          placeholder="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/ONHPQAJLQNkv3eBgwAAAABJRU5ErkJggg=="
+          style={{ objectFit: "cover" }}
+        />
+        <Stack gap="28px" zIndex={2} position="relative" width={320}>
+          <Typography
+            variant="headline1"
+            color={theme.palette.neutral.dark}
+            textAlign="center"
+          >
+            CÔ DÂU & CHÚ RỂ
+          </Typography>
+          <Stack>
+            <Stack height={72} justifyContent="center" gap="4px">
+              <Typography
+                variant="headline2"
+                color={theme.palette.neutral.dark}
+              >
+                NHÀ GÁI
+              </Typography>
+              <Typography variant="label" color={theme.palette.neutral.dark}>
+                Phúc Bồi, Quỳnh Hưng, Quỳnh Phụ, Thái Bình
+              </Typography>
+            </Stack>
+            <Stack gap="4px">
+              <Stack>
+                <Typography variant="title" color={theme.palette.neutral.dark}>
+                  Cô dâu
+                </Typography>
+                <Typography
+                  variant="display"
+                  color={theme.palette.neutral.dark}
+                >
+                  Vũ Ngọc Diệp
+                </Typography>
+              </Stack>
+              <WishTypographyPhone>
+                “... khi bệnh hoạn cũng như lúc khoẻ mạnh, để yêu thương và tôn
+                trọng nhau suốt đời.”
+              </WishTypographyPhone>
+              <Typography
+                variant="body"
+                color={theme.palette.neutral.dark}
+                sx={{ whiteSpace: "pre-wrap" }}
+              >
+                Ông VŨ ĐĂNG HOÁN{"\n"}Bà VŨ THỊ LAN HƯƠNG
+              </Typography>
+            </Stack>
+          </Stack>
+        </Stack>
+      </Stack>
+      <Stack
+        width="100%"
+        height={780}
+        position="absolute"
+        sx={{
           transition: theme.transitions.create(["all"], {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen,
           }),
           transform: state ? "" : "translateX(100%)",
         }}
-      />
+        padding="32px 0"
+        alignItems="center"
+      >
+        <Image
+          src="/images/couple-groom.jpeg"
+          alt="couple bride"
+          quality={100}
+          fill
+          sizes="100vw"
+          placeholder="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/ONHPQAJLQNkv3eBgwAAAABJRU5ErkJggg=="
+          style={{ objectFit: "cover" }}
+        />
+        <Stack gap="28px" zIndex={2} position="relative" width={320}>
+          <Typography
+            variant="headline1"
+            color={theme.palette.neutral.dark}
+            textAlign="center"
+          >
+            CÔ DÂU & CHÚ RỂ
+          </Typography>
+          <Stack>
+            <Stack height={72} justifyContent="center" gap="4px">
+              <Typography
+                variant="headline2"
+                color={theme.palette.neutral.dark}
+              >
+                NHÀ TRAI
+              </Typography>
+              <Typography variant="label" color={theme.palette.neutral.dark}>
+                Tân Dân, Thị trấn Thứa, Lương Tài, Bắc Ninh
+              </Typography>
+            </Stack>
+            <Stack gap="4px">
+              <Stack>
+                <Typography variant="title" color={theme.palette.neutral.dark}>
+                  Chú rể
+                </Typography>
+                <Typography
+                  variant="display"
+                  color={theme.palette.neutral.dark}
+                >
+                  Nguyễn Việt Anh
+                </Typography>
+              </Stack>
+              <WishTypographyPhone>
+                “Chúng mình hứa sẽ giữ lòng thuỷ chung, khi thịnh vượng cũng như
+                lúc gian nan...”
+              </WishTypographyPhone>
+              <Typography
+                variant="body"
+                color={theme.palette.neutral.dark}
+                sx={{ whiteSpace: "pre-wrap" }}
+              >
+                Ông NGUYỄN VĂN TUẤN{"\n"}Bà PHẠM THỊ HỒNG
+              </Typography>
+            </Stack>
+          </Stack>
+        </Stack>
+      </Stack>
       {state ? (
         <button
           onClick={handleClick}
@@ -181,12 +297,7 @@ export const CoupleSession = forwardRef(function Couple(_, ref) {
                   gap: "16px",
                 }}
               >
-                <Stack
-                  width={236}
-                  justifyContent="center"
-                  alignItems="center"
-                  gap="4px"
-                >
+                <Stack justifyContent="center" alignItems="center" gap="4px">
                   <Typography
                     variant="headline1"
                     alignSelf="stretch"
@@ -227,20 +338,10 @@ export const CoupleSession = forwardRef(function Couple(_, ref) {
                   Nguyễn Việt Anh
                 </Typography>
               </Stack>
-              <Typography
-                sx={{
-                  color: theme.palette.neutral.dark,
-                  textAlign: "center",
-                  fontFamily: bellissima.style.fontFamily,
-                  fontSize: "24px",
-                  fontWeight: "400",
-                  lineHeight: "32px",
-                  alignSelf: "stretch",
-                }}
-              >
+              <WishTypographyDesktop>
                 “Chúng mình hứa sẽ giữ lòng thuỷ chung, khi thịnh vượng cũng như
                 lúc gian nan...”
-              </Typography>
+              </WishTypographyDesktop>
               <Typography
                 variant="body"
                 sx={{
@@ -291,12 +392,7 @@ export const CoupleSession = forwardRef(function Couple(_, ref) {
                   gap: "16px",
                 }}
               >
-                <Stack
-                  width={236}
-                  justifyContent="center"
-                  alignItems="center"
-                  gap="4px"
-                >
+                <Stack justifyContent="center" alignItems="center" gap="4px">
                   <Typography
                     variant="headline1"
                     alignSelf="stretch"
@@ -337,20 +433,10 @@ export const CoupleSession = forwardRef(function Couple(_, ref) {
                   Vũ Ngọc Diệp
                 </Typography>
               </Stack>
-              <Typography
-                sx={{
-                  color: theme.palette.neutral.dark,
-                  textAlign: "center",
-                  fontFamily: bellissima.style.fontFamily,
-                  fontSize: "24px",
-                  fontWeight: "400",
-                  lineHeight: "32px",
-                  alignSelf: "stretch",
-                }}
-              >
+              <WishTypographyDesktop>
                 “... khi ốm đau cũng như lúc khoẻ mạnh, để yêu thương và tôn
                 trọng nhau suốt đời.”
-              </Typography>
+              </WishTypographyDesktop>
               <Typography
                 variant="body"
                 sx={{

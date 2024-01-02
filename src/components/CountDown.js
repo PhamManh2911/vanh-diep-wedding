@@ -13,10 +13,10 @@ export function CountDown() {
   const nhaTrai = nha === "trai";
   const { isPhone } = useMedia();
 
-  const [days, setDays] = useState(null);
-  const [hours, setHours] = useState(null);
-  const [minutes, setMinutes] = useState(null);
-  const [seconds, setSeconds] = useState(null);
+  const [days, setDays] = useState(0);
+  const [hours, setHours] = useState(0);
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(0);
 
   const marriedDay = useMemo(
     () => moment(nhaTrai ? "2024-01-01 09:00:00" : "2024-01-01 07:00:00"),
@@ -24,6 +24,7 @@ export function CountDown() {
   );
 
   useEffect(() => {
+    if (marriedDay.isBefore(moment())) return;
     const interval = setInterval(() => {
       setDays(marriedDay.diff(moment(), "days"));
       setHours(marriedDay.diff(moment(), "hours") % 24);

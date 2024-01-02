@@ -101,7 +101,7 @@ export function ThreeDCarousel() {
             fontFamily: bellissima.style.fontFamily,
             fontSize: 80,
             lineHeight: "64px",
-            letterSpacing: "3.2px",
+            letterSpacing: "normal",
           }}
         >
           {nhaTrai ? "Việt Anh &  Ngọc Diệp" : "Ngọc Diệp &  Việt Anh"}

@@ -75,6 +75,7 @@ export function SlideCarousel() {
             fontWeight: "400",
             lineHeight: "64px",
             zIndex: 1001,
+            letterSpacing: "normal",
           }}
         >
           {nhaTrai ? "Việt Anh &  Ngọc Diệp" : "Ngọc Diệp &  Việt Anh"}
