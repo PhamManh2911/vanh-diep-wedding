@@ -98,7 +98,9 @@ export const MungCuoiSession = forwardRef(function MungCuoiSession({}, ref) {
             <Box display="flex" gap="4px" alignItems="flex-end">
               {isPhone && <MungCuoiFlowerMobile />}
               <Image
-                src={nhaTrai ? "/images/qr-groom.png" : "/images/qr-bride.png"}
+                src={
+                  nhaTrai ? "/images/qr-groom.png" : "/images/qr-bride.png"
+                }
                 width={226}
                 height={224}
                 alt="qr"
@@ -212,19 +214,20 @@ export const MungCuoiSession = forwardRef(function MungCuoiSession({}, ref) {
                     <Stack
                       justifyContent="center"
                       alignItems="center"
-                      width={isPhone ? 270 : 400}
-                      height={isPhone ? 270 : 400}
+                      width={isPhone ? 240 : 360}
+                      height={isPhone ? 240 : 360}
                       sx={{
-                        borderRadius: "24px",
-                        border: `${isPhone ? 8 : 12}px solid ${
+                        borderRadius: isPhone ? "12px" : "24px",
+                        border: `${isPhone ? 4 : 12}px solid ${
                           theme.palette.primary.main
                         }`,
+                        overflow: "hidden",
                       }}
                     >
                       <Image
                         src="/images/crypto-groom.png"
-                        width={isPhone ? 240 : 360}
-                        height={isPhone ? 240 : 360}
+                        width={isPhone ? 230 : 335}
+                        height={isPhone ? 230 : 335}
                         alt="crypto"
                       />
                     </Stack>

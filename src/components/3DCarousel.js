@@ -31,11 +31,11 @@ const genCommonSx = (theme) => ({
 });
 
 const images = [
-  "/images/image1.png",
-  "/images/image2.png",
-  "/images/image3.png",
-  "/images/image4.png",
-  "/images/image5.png",
+  "/images/image1.webp",
+  "/images/image2.webp",
+  "/images/image3.webp",
+  "/images/image4.webp",
+  "/images/image5.webp",
 ];
 
 const genTransitionProps = (index) => {

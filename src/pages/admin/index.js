@@ -29,7 +29,7 @@ function InvitationImage({ src, loading, sx = {}, imageSx, ...props }) {
     const anchor = document.createElement("a");
 
     anchor.href = src;
-    anchor.download = "thiepcuoi.jpeg";
+    anchor.download = "thiepcuoi.webp";
     document.body.appendChild(anchor);
     anchor.click();
     document.body.removeChild(anchor);

@@ -222,7 +222,7 @@ export const CoupleSession = forwardRef(function Couple(_, ref) {
     >
       <Image
         alt="couple"
-        src="/images/couple.jpeg"
+        src="/images/couple.webp"
         placeholder="blur"
         blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/ONHPQAJLQNkv3eBgwAAAABJRU5ErkJggg=="
         quality={100}

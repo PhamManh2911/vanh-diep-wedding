@@ -1,4 +1,4 @@
-import { uuid } from "uuidv4";
+import { v4 as uuidv4 } from "uuid";
 import { forwardRef, useState } from "react";
 import { Box, Stack, Typography, useTheme } from "@mui/material";
 import Image from "next/image";
@@ -194,7 +194,7 @@ export const AlbumSession = forwardRef(function AlbumSession(_, ref) {
         <div id="photos">
           {imagesAlbum.map((images) => (
             <Image
-              key={uuid()}
+              key={uuidv4()}
               src={images.src}
               height={images.height}
               alt="image"

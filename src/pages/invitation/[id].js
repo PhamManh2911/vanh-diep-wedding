@@ -25,8 +25,8 @@ export default function Invitation({ user }) {
         sx={{
           background: `url("${
             nhaTrai
-              ? "/images/thiep-moi-nha-trai.png"
-              : "/images/thiep-moi-nha-gai.png"
+              ? "/images/thiep-moi-nha-trai.webp"
+              : "/images/thiep-moi-nha-gai.webp"
           }"), lightgray 50% / cover no-repeat`,
         }}
       ></Box>

@@ -5,9 +5,9 @@ import { nha } from "@/configs/app";
 import { bellissima } from "../../public/fonts";
 
 const phoneImages = [
-  "/images/image-phone1.png",
-  "/images/image-phone2.png",
-  "/images/image-phone3.png",
+  "/images/image1.webp",
+  "/images/image3.webp",
+  "/images/image4.webp",
 ];
 
 const genProps = (absPos) => {
@@ -21,6 +21,7 @@ const genProps = (absPos) => {
 
 const genCommonStyle = (theme) => ({
   borderRadius: "8px",
+  overflow: "hidden",
   position: "absolute",
   top: "50%",
   left: "50%",
@@ -81,15 +82,23 @@ export function SlideCarousel() {
           {nhaTrai ? "Việt Anh &  Ngọc Diệp" : "Ngọc Diệp &  Việt Anh"}
         </Typography>
         {phoneImages.map((image, index) => (
-          <Image
+          <Box
             key={image}
-            src={image}
-            style={{ ...genCommonStyle(theme), ...genProps(index - current) }}
             width={327}
             height={180}
-            alt="slide carousel"
-            priority
-          />
+            sx={{ ...genCommonStyle(theme), ...genProps(index - current) }}
+          >
+            <Image
+              src={image}
+              alt="slide carousel"
+              priority
+              quality={100}
+              fill
+              sizes="100vw"
+              placeholder="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/ONHPQAJLQNkv3eBgwAAAABJRU5ErkJggg=="
+              style={{ objectFit: "cover" }}
+            />
+          </Box>
         ))}
       </Box>
       <Box

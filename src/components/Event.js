@@ -126,7 +126,7 @@ export const EventSession = forwardRef(function EventSession(_, ref) {
         >
           <Image
             alt="event image"
-            src="/images/event.jpeg"
+            src="/images/event.webp"
             placeholder="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/ONHPQAJLQNkv3eBgwAAAABJRU5ErkJggg=="
             quality={100}
             fill
