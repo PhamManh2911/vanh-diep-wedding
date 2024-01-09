@@ -1,6 +1,6 @@
 import axios from "axios";
 import Image from "next/image";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   Box,
   Dialog,
@@ -12,7 +12,6 @@ import {
 import { useSearchParams } from "next/navigation";
 
 import { Button } from "./Buttons";
-import { useUser } from "@/pages/[id]";
 import { nha } from "@/configs/app";
 import { useMedia } from "@/providers/MediaProvider";
 
@@ -70,10 +69,9 @@ function FormHeader({ close }) {
   );
 }
 
-function FormBody() {
+function FormBody({ user }) {
   const theme = useTheme();
 
-  const { user } = useUser();
   const { isPhone } = useMedia();
   const nhaTrai = nha === "trai";
 
@@ -84,54 +82,41 @@ function FormBody() {
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = useCallback(async () => {
-    if (join && day.length === 0) {
-      setError(true);
-    } else {
+    if (join && day.length === 0) setError(true);
+    else {
       setLoading(true);
-      const payload = { join };
+      if (user) {
+        const payload = { join };
 
-      payload["31/12/2023"] = day.includes("31/12/2023");
-      payload["01/01/2024"] = day.includes("01/01/2024");
-      const {
-        data: { data },
-      } = record
-        ? await axios.put(
-            `${location.origin}/api/invitees/${user.id}`,
-            payload,
-            { params: { nha_trai: nhaTrai } }
-          )
-        : await axios.post(
-            `${location.origin}/api/invitees`,
-            { ...payload, uid: user.id },
-            { params: { nha_trai: nhaTrai } }
+        payload["31/12/2023"] = day.includes("31/12/2023");
+        payload["01/01/2024"] = day.includes("01/01/2024");
+        const {
+          data: { data },
+        } = record
+          ? await axios.put(
+              `${location.origin}/api/invitees/${user.id}`,
+              payload,
+              { params: { nha_trai: nhaTrai } }
+            )
+          : await axios.post(
+              `${location.origin}/api/invitees`,
+              { ...payload, uid: user.id },
+              { params: { nha_trai: nhaTrai } }
+            );
+
+        setRecord(data.record);
+      } else {
+        await new Promise((resolve, _) => {
+          setTimeout(
+            () => resolve("Mock update user record successfully"),
+            1000
           );
-
-      setRecord(data.record);
+        });
+        setRecord({});
+      }
       setLoading(false);
     }
-  }, [join, day, record, user.id, nhaTrai]);
-
-  const fetchFormData = useCallback(async () => {
-    setLoading(true);
-    const {
-      data: {
-        data: { record },
-      },
-    } = await axios(`${location.origin}/api/invitees/${user.id}`, {
-      params: { nha_trai: nhaTrai },
-    });
-
-    setRecord(record);
-    setJoin(record?.join);
-    setDay(() => {
-      const days = [];
-
-      if (record?.["31/12/2023"]) days.push("31/12/2023");
-      if (record?.["01/01/2024"]) days.push("01/01/2024");
-      return days;
-    });
-    setLoading(false);
-  }, [user.id, nhaTrai]);
+  }, [join, day, record, user, nhaTrai]);
 
   useEffect(() => {
     setDay([]);
@@ -142,36 +127,73 @@ function FormBody() {
   }, [join, day]);
 
   useEffect(() => {
-    fetchFormData();
-  }, [fetchFormData]);
+    const fetchFormData = async () => {
+      setLoading(true);
+      if (user) {
+        const {
+          data: {
+            data: { record },
+          },
+        } = await axios(`${location.origin}/api/invitees/${user.id}`, {
+          params: { nha_trai: nhaTrai },
+        });
 
-  return loading ? (
-    <Stack
-      width="100%"
-      height={300}
-      justifyContent="center"
-      alignItems="center"
-    >
-      <CircularProgress />
-    </Stack>
-  ) : !!record ? (
-    <Stack
-      alignItems="center"
-      padding={isPhone ? "8px 16px" : "16px 32px"}
-      gap={isPhone ? "8px" : "32px"}
-      height={444}
-    >
-      <Typography
-        textAlign="left"
-        color="#202325"
-        variant="title"
-      >{`Cảm ơn ${user.username}!`}</Typography>
-      <Image src="/icons/thankyou.svg" width={128} height={85} alt="thankyou" />
-      <Typography textAlign="right" color="#202325" variant="title">
-        Hẹn gặp lại!
-      </Typography>
-    </Stack>
-  ) : (
+        setRecord(record);
+        setJoin(record?.join);
+        setDay(() => {
+          const days = [];
+
+          if (record?.["31/12/2023"]) days.push("31/12/2023");
+          if (record?.["01/01/2024"]) days.push("01/01/2024");
+          return days;
+        });
+      } else {
+        await new Promise((resolve, _) => {
+          setTimeout(() => resolve("Mock get data successfully"), 500);
+        });
+      }
+      setLoading(false);
+    };
+
+    fetchFormData();
+  }, [nhaTrai, user]);
+
+  if (loading)
+    return (
+      <Stack
+        width="100%"
+        height={300}
+        justifyContent="center"
+        alignItems="center"
+      >
+        <CircularProgress />
+      </Stack>
+    );
+
+  if (record)
+    return (
+      <Stack
+        alignItems="center"
+        padding={isPhone ? "8px 16px" : "16px 32px"}
+        gap={isPhone ? "8px" : "32px"}
+        height={444}
+      >
+        <Typography textAlign="left" color="#202325" variant="title">{`Cảm ơn ${
+          user?.username ?? "Bạn"
+        }!`}</Typography>
+        <Image
+          src="/icons/thankyou.svg"
+          width={128}
+          height={85}
+          alt="thankyou"
+        />
+        <Typography textAlign="right" color="#202325" variant="title">
+          Hẹn gặp lại!
+        </Typography>
+      </Stack>
+    );
+
+  return (
     <Stack
       alignItems="center"
       gap={isPhone ? "16px" : "32px"}
@@ -181,7 +203,7 @@ function FormBody() {
       <Stack alignItems="flex-start" gap="16px" width="100%">
         <Stack alignItems="flex-start" gap="2px">
           <Typography variant="title" color="#202325" textAlign="left">
-            {`Xin chào ${user.username}!`}
+            {`Xin chào ${user?.username ?? "Bạn"}!`}
           </Typography>
         </Stack>
         <Stack alignItems="flex-start" gap="2px">
@@ -312,16 +334,64 @@ function FormBody() {
   );
 }
 
-export function Form() {
-  const { user } = useUser();
+function FormDialog({ user, open, setOpen, pos }) {
+  const { isPhone } = useMedia();
+  const theme = useTheme();
+
+  return isPhone ? (
+    <Dialog
+      open={open}
+      onClose={() => setOpen(false)}
+      PaperProps={{
+        sx: {
+          borderRadius: "20px",
+          border: "1px solid #F5F5F5",
+          width: 328,
+        },
+      }}
+    >
+      <Box
+        sx={{
+          display: "inline-flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <FormHeader close={() => setOpen(false)} />
+        <FormBody user={user} />
+      </Box>
+    </Dialog>
+  ) : (
+    <Box
+      sx={{
+        display: open ? "inline-flex" : "none",
+        flexDirection: "column",
+        alignItems: "center",
+        borderRadius: "20px",
+        border: "1px solid #F5F5F5",
+        background: theme.palette.neutral.light,
+        width: 375,
+        position: "fixed",
+        ...pos,
+        zIndex: 1005,
+        transform: "translate(-24px, -90px)",
+      }}
+    >
+      <FormHeader close={() => setOpen(false)} />
+      <FormBody user={user} />
+    </Box>
+  );
+}
+
+export function Form({ user }) {
   const theme = useTheme();
   const { isPhone } = useMedia();
-  const searchParams = useSearchParams();
   const [open, setOpen] = useState(false);
-  const [pos, setPos] = useState(
-    isPhone ? { left: 220, top: 500 } : { left: 850, top: 680 }
+
+  const pos = useMemo(
+    () => (isPhone ? { right: 10, bottom: 30 } : { right: 20, bottom: 60 }),
+    [isPhone]
   );
-  const form = searchParams.get("form");
 
   // const handleDrag = (event) => {
   //   event.preventDefault();
@@ -330,64 +400,12 @@ export function Form() {
   //   if (!clientX || !clientY) return;
   //   setPos({ left: clientX, top: clientY });
   // };
+  if (user?.record_id) return null;
 
-  useEffect(() => {
-    setPos(isPhone ? { right: 10, bottom: 140 } : { right: 20, bottom: 60 });
-  }, [isPhone]);
-
-  return form === "true" && !user.record_id ? (
+  return (
     <>
-      {isPhone && (
-        <Dialog
-          open={open}
-          onClose={() => setOpen(false)}
-          PaperProps={{
-            sx: {
-              borderRadius: "20px",
-              border: "1px solid #F5F5F5",
-              width: 328,
-            },
-          }}
-        >
-          <Box
-            sx={{
-              display: "inline-flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <FormHeader close={() => setOpen(false)} />
-            <FormBody user={user} />
-          </Box>
-        </Dialog>
-      )}
+      <FormDialog user={user} open={open} setOpen={setOpen} pos={pos} />
       <Box sx={{ position: "fixed", ...pos, zIndex: 1005 }}>
-        {!isPhone && open && (
-          <Box
-            sx={{
-              display: "inline-flex",
-              flexDirection: "column",
-              alignItems: "center",
-              borderRadius: "20px",
-              border: "1px solid #F5F5F5",
-              background: theme.palette.neutral.light,
-              width: 375,
-              ...(isPhone
-                ? {
-                    top: "50vh",
-                    left: "50vw",
-                    transform: "translate(-50%, -50%)",
-                  }
-                : {
-                    position: "absolute",
-                    transform: "translate(30px, -100%)",
-                  }),
-            }}
-          >
-            <FormHeader close={() => setOpen(false)} />
-            <FormBody user={user} />
-          </Box>
-        )}
         <Box
           sx={{
             display: "flex",
@@ -419,5 +437,5 @@ export function Form() {
         </Box>
       </Box>
     </>
-  ) : null;
+  );
 }

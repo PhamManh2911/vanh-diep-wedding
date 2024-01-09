@@ -1,4 +1,4 @@
-import { createContext, useContext, useRef } from "react";
+import { useRef } from "react";
 import { Stack } from "@mui/material";
 
 import { appHostname } from "@/configs/app";
@@ -12,12 +12,6 @@ import { InvitationSession } from "@/components/Invitation";
 import { Form } from "@/components/Form";
 import { Footer } from "@/components/Footer";
 import { NavBar } from "@/components/Layout/NavBar";
-
-const UserContext = createContext();
-
-export function useUser() {
-  return useContext(UserContext);
-}
 
 export async function getServerSideProps(context) {
   const { id } = context.query;
@@ -40,24 +34,22 @@ export default function Wedding({ user }) {
   const mungCuoiRef = useRef();
 
   return (
-    <UserContext.Provider value={{ user }}>
-      <Stack>
-        <NavBar
-          clickEvent={() => handleScrollToView(eventRef.current)}
-          clickCouple={() => handleScrollToView(coupleRef.current)}
-          clickAlbum={() => handleScrollToView(albumRef.current)}
-          clickMungCuoi={() => handleScrollToView(mungCuoiRef.current)}
-        />
-        <Form />
-        <InvitationSession username={username} />
-        <CountDown />
-        <EventSession ref={eventRef} />
-        <CoupleSession ref={coupleRef} />
-        <TimelineSession />
-        <AlbumSession ref={albumRef} />
-        <MungCuoiSession ref={mungCuoiRef} />
-        <Footer />
-      </Stack>
-    </UserContext.Provider>
+    <Stack>
+      <NavBar
+        clickEvent={() => handleScrollToView(eventRef.current)}
+        clickCouple={() => handleScrollToView(coupleRef.current)}
+        clickAlbum={() => handleScrollToView(albumRef.current)}
+        clickMungCuoi={() => handleScrollToView(mungCuoiRef.current)}
+      />
+      <Form user={user} />
+      <InvitationSession username={username} />
+      <CountDown />
+      <EventSession ref={eventRef} />
+      <CoupleSession ref={coupleRef} />
+      <TimelineSession />
+      <AlbumSession ref={albumRef} />
+      <MungCuoiSession ref={mungCuoiRef} />
+      <Footer />
+    </Stack>
   );
 }

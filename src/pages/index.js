@@ -11,6 +11,7 @@ import { AlbumSession } from "@/components/Album";
 import { MungCuoiSession } from "@/components/MungCuoi";
 import { Footer } from "@/components/Footer";
 import { NavBar } from "@/components/Layout/NavBar";
+import { Form } from "@/components/Form";
 
 export default function Home() {
   const handleScrollToView = (dom) => dom.scrollIntoView({ behavior: "smooth" });
@@ -32,6 +33,7 @@ export default function Home() {
           clickAlbum={() => handleScrollToView(albumRef.current)}
           clickMungCuoi={() => handleScrollToView(mungCuoiRef.current)}
         />
+        <Form />
         <InvitationSession />
         <CountDown />
         <EventSession ref={eventRef} />
