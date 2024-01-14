@@ -199,6 +199,7 @@ export const AlbumSession = forwardRef(function AlbumSession(_, ref) {
               height={images.height}
               alt="image"
               width={isPhone ? 146 : 236}
+              quality={100}
             />
           ))}
         </div>

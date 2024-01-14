@@ -57,11 +57,10 @@ a {
   column-count: 4;
   column-gap: 20px;
   row-gap: 20px;
+  width: 1016px;
 }
 
 #photos img {
-  /* Just in case there are inline attributes */
-  width: 100% !important;
   height: auto !important;
   border-radius: 20px;
   margin-top: 20px;
@@ -81,11 +80,12 @@ a {
     column-count: 3;
   }
 }
-@media (max-width: 800px) {
+@media (max-width: 600px) {
   #photos {
     -moz-column-count: 2;
     -webkit-column-count: 2;
     column-count: 2;
+    width: 316px;
   }
 }
 @media (max-width: 400px) {

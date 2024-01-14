@@ -2,8 +2,9 @@ import theme from "@/configs/theme";
 import Head from "next/head";
 
 import { ThemeProvider } from "@mui/material";
-import "@/styles/globals.css";
 import { MediaProvider } from "@/providers/MediaProvider";
+
+import "@/styles/globals.css";
 
 export default function App({ Component, pageProps }) {
   return (
